@@ -261,6 +261,37 @@ section{position:relative;padding:clamp(4.2rem,11vh,8.5rem) var(--pad);overflow:
 .tier.tier-star .tier-inc{color:var(--gold);border-color:rgba(255,204,0,.38)}
 @media (max-width:960px){.tiers{grid-template-columns:1fr}.tier-for{min-height:0}}
 
+/* fall term block — the one-PO entry point */
+.block{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.3fr);
+  background:var(--mahogany);color:var(--sand);border-radius:2px;overflow:hidden;
+  box-shadow:0 20px 46px rgba(59,0,0,.2);
+}
+.block-body{padding:clamp(1.6rem,3vw,2.6rem);position:relative}
+.block-body::before{
+  content:"";position:absolute;inset:0;background-image:url("images/monogram-tile.png");
+  background-size:200px auto;opacity:.05;pointer-events:none;
+}
+.block-body > *{position:relative;z-index:1}
+.block-list{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem 1.4rem}
+.block-list li{position:relative;padding-left:1.4rem;font-size:.9rem;color:rgba(255,250,235,.9);line-height:1.45}
+.block-list li::before{content:"";position:absolute;left:0;top:.66em;width:8px;height:2px;background:var(--gold)}
+.block-price{
+  background:var(--gold);color:var(--mahogany);position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:clamp(1.6rem,3vw,2.4rem);
+}
+.bp-amt{font-family:var(--serif);font-size:clamp(2.4rem,4.4vw,3.5rem);font-weight:700;line-height:1}
+.bp-note{margin-top:.7rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+  font-variation-settings:"wdth" 108;line-height:1.6}
+.bp-note span{text-transform:none;letter-spacing:0;font-weight:600;font-size:.8rem;opacity:.72}
+@media (max-width:820px){
+  .block{grid-template-columns:1fr}
+  .block-list{grid-template-columns:1fr}
+  .block-price{flex-direction:row;align-items:baseline;gap:1.2rem;flex-wrap:wrap}
+  .bp-note{margin-top:0}
+}
+
 .addons{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
 .addon{border:1px dashed rgba(102,1,0,.35);padding:clamp(1.2rem,2.2vw,1.7rem);background:rgba(247,227,184,.42);border-radius:2px}
 .addon h4{font-size:1.1rem;color:var(--maroon);margin-bottom:.5rem}
@@ -296,6 +327,19 @@ section{position:relative;padding:clamp(4.2rem,11vh,8.5rem) var(--pad);overflow:
 .sign dd{margin:0;font-size:.95rem;line-height:1.5;color:rgba(255,250,235,.9)}
 .sign dd a{text-decoration:none;border-bottom:1px solid rgba(255,204,0,.5);padding-bottom:1px}
 .sign dd a:hover{border-bottom-color:var(--gold)}
+
+/* close: the three-step path */
+.steps{counter-reset:st;list-style:none;margin:0 0 .5rem;padding:0;max-width:62ch}
+.steps li{
+  counter-increment:st;position:relative;padding:.95rem 0 .95rem 0;
+  border-top:1px solid rgba(255,250,235,.22);
+  font-size:.95rem;line-height:1.5;color:rgba(255,250,235,.86);
+}
+.steps li:last-child{border-bottom:1px solid rgba(255,250,235,.22)}
+.steps li span{
+  display:block;font-size:.62rem;letter-spacing:.17em;text-transform:uppercase;font-weight:800;
+  font-variation-settings:"wdth" 108;color:var(--gold);margin-bottom:.3rem;
+}
 
 footer{background:var(--terra);color:rgba(247,227,184,.5);padding:2.6rem var(--pad);font-size:.74rem;line-height:1.6}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1.2rem 2.6rem;justify-content:space-between;align-items:center}
@@ -359,16 +403,16 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
     <div>
       <div class="cover-wordmark rv"><img src="images/ht-wordmark-gold.png" alt="Huston-Tillotson University"></div>
       <p class="eyebrow on-dark rv d1">A Standing Content Operation</p>
-      <h1 class="rv d2">The president<br>who is <em>everywhere</em><br>at once.</h1>
-      <p class="cover-sub rv d3">Huston-Tillotson has a president people want in the room. There are more rooms than there are hours. This is the operation that puts her in all of them &mdash; on brand, on the calendar, every month.</p>
+      <h1 class="rv d2">The president in<br>every room she was<br><em>invited to</em>.</h1>
+      <p class="cover-sub rv d3">Huston-Tillotson has a president people want in the room. There are more invitations than there are hours in her week. This is the operation that answers them &mdash; on brand, on the calendar, every month.</p>
       <div class="cover-meta rv d4">
-        <div>Prepared for<b>Dr. Melva K. Wallace<br>Dr. Shaquille K. Dillon</b></div>
+        <div>Prepared for<b>Dr. Melva K. Wallace<br><span style="letter-spacing:.09em;font-weight:600;opacity:.78">7th President and CEO</span><br>Dr. Shaquille K. Dillon<br><span style="letter-spacing:.09em;font-weight:600;opacity:.78">VP, Marketing, Strategy,<br>Impact &amp; Innovation</span></b></div>
         <div>Prepared by<b>Elliott Taylor<br>Taylormade Creative</b></div>
         <div>Date<b>August 17, 2026</b></div>
       </div>
     </div>
     <figure class="cover-figure rv d3">
-      <span class="cover-tag">Where every soul finds its strength</span>
+      <span class="cover-tag">Where every soul finds its strength.</span>
       <img src="images/wallace-cutout.png" alt="Dr. Melva K. Wallace, 7th President and CEO of Huston-Tillotson University">
     </figure>
   </div>
@@ -383,15 +427,15 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
     </div>
     <div>
       <div class="qcard rv d1">
-        <div class="who">Sent to the marketing group, August 13 and again August 15</div>
+        <div class="who">The question still on the table</div>
         <p>&ldquo;Would you like me to recreate everything according to the guidelines? Or anything specific like just the social media post?&rdquo;</p>
       </div>
-      <p class="answer rv d2">Here is the honest answer: everything, on the new guidelines &mdash; and then again next month, and the month after that.</p>
+      <p class="answer rv d2">The answer, plainly: everything, on the new guidelines &mdash; and then again next month, and the month after that.</p>
       <hr class="rule rv d3">
       <div class="body-w rv d3">
-        <p>A brand identity system is not a one-time conversion. It is a standard that has to hold across every post, every video, every email, every printed program, for the whole year &mdash; which means somebody has to be producing against it continuously, not re-converting a back catalog once and hoping it sticks.</p>
-        <p>That is what this document proposes. Not a project. A standing month: a fixed set of finished work produced for the Office of the President on your calendar, in your identity system, approved by your office before anything publishes.</p>
-        <p style="color:var(--maroon)"><b>The eleven days between August 6 and August 17 were the pilot. None of that work appears on an invoice. What follows is what it looks like when it does not stop.</b></p>
+        <p>A brand identity system is not a one-time conversion. It is a standard that has to hold across every post, every video, every email and every printed program for the whole year, which means somebody has to be producing against it continuously rather than re-converting a back catalog once and hoping it holds.</p>
+        <p>So this document does not propose a project. It proposes a standing month: a fixed set of finished work produced for the Office of the President, on your calendar, in your identity system, and approved by your office before anything publishes.</p>
+        <p style="color:var(--maroon)"><b>The last two weeks were one month of it, run at speed. What follows is the same thing with a calendar behind it, and it would sit under Marketing.</b></p>
       </div>
     </div>
   </div>
@@ -403,7 +447,7 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
   <div class="wrap">
     <p class="eyebrow on-dark rv">Built on your system, not around it</p>
     <h2 class="h-lg rv d1" style="color:var(--ember);max-width:26ch">The June 2026 Brand Identity System is the spec.</h2>
-    <p class="lede rv d2" style="margin:1.7rem 0 3rem;color:rgba(247,227,184,.82)">Every value below is pulled from the guidelines Dr. Dillon sent on August 13. This page is set in them.</p>
+    <p class="lede rv d2" style="margin:1.7rem 0 3rem;color:rgba(247,227,184,.82)">Every value below is pulled from the guidelines Dr. Dillon sent on August 13. This page is built to them.</p>
 
     <div class="swatches rv d2">
       <div class="sw" style="background:#660100;color:#FFFAEB">HT Maroon<span>#660100</span></div>
@@ -431,12 +475,12 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
         <dd>The <b>HT monogram pattern</b> runs behind this page tone-on-tone, as specified. The <b>Bell Tower</b> and the <b>mosaic</b> come online as soon as vectors are released.</dd>
       </div>
       <div>
-        <dt>What we still need from Marketing</dt>
-        <dd>Vector files &mdash; <b>SVG, EPS or AI</b> &mdash; of the wordmarks, monograms, Bell Tower and mosaic tile. The PNGs on hand cannot go to press at size. The <b>Presidential Seal</b> stays with the Office of the President; we will not place it without written direction.</dd>
+        <dt>Assets to request from your office</dt>
+        <dd>Vector files &mdash; <b>SVG, EPS or AI</b> &mdash; for the wordmarks, monograms, Bell Tower and mosaic tile, so everything holds at print size. The <b>Presidential Seal</b> stays with the Office of the President; we will not place it without written direction.</dd>
       </div>
       <div>
-        <dt>Verified copy standards</dt>
-        <dd>Tagline set verbatim: <b>&ldquo;Where every soul finds its strength.&rdquo;</b> Every stat, date and name in a deliverable gets sourced to your office before it ships. Nothing gets estimated.</dd>
+        <dt>Copy standards</dt>
+        <dd>Tagline set verbatim: <b>&ldquo;Where every soul finds its strength.&rdquo;</b> Every stat, date and name in a deliverable gets sourced back to your office before it ships.</dd>
       </div>
       <div>
         <dt>Approval, in your hands</dt>
@@ -446,38 +490,69 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
   </div>
 </section>
 
+<!-- ============================== FOR MARKETING ============================== -->
+<section class="s-ember" style="padding-block:clamp(3.4rem,7vh,5.4rem)">
+  <div class="wrap">
+    <div class="two" style="align-items:end;margin-bottom:clamp(1.8rem,3.4vw,2.6rem)">
+      <div>
+        <p class="eyebrow rv" style="color:var(--maroon)">A note to the Marketing office</p>
+        <h2 class="h-md rv d1" style="color:var(--maroon);max-width:26ch">This is production capacity, not a second opinion.</h2>
+      </div>
+      <p class="rv d2" style="margin:0;color:var(--sable);max-width:46ch">Dr. Dillon, the useful version of this arrangement is one where your office gains hands and loses nothing. That means the strategy, the standards and the final word stay where they already are.</p>
+    </div>
+    <div class="terms">
+      <div class="term rv d1">
+        <h4>Output without a hire</h4>
+        <p>A standing month of finished video, social, email and print for less than the loaded cost of one full-time content producer, and with no recruiting, onboarding, equipment or software attached to it.</p>
+      </div>
+      <div class="term rv d2">
+        <h4>You keep the calendar</h4>
+        <p>We produce against the schedule your office already maintains. We do not set priorities, invent campaigns, or publish anything ourselves unless you ask us to.</p>
+      </div>
+      <div class="term rv d3">
+        <h4>One vendor, one invoice</h4>
+        <p>One line item, one point of contact, one approval path. Nothing to reconcile across a roster of freelancers, and a monthly reach and engagement summary you can carry upward.</p>
+      </div>
+      <div class="term rv d4">
+        <h4>Your standard, enforced</h4>
+        <p>Every file ships inside the June 2026 system. If something needs an exception, it comes to you through social@htu.edu before it is made, not after it is published.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================== PROOF ============================== -->
 <section class="s-sand">
   <div class="wrap">
     <div class="two" style="align-items:end;margin-bottom:clamp(2.2rem,4vw,3.4rem)">
       <div>
-        <p class="eyebrow rv">Eleven days · August 6&ndash;17</p>
-        <h2 class="h-lg rv d1" style="color:var(--maroon)">Nine finished pieces, already yours.</h2>
+        <p class="eyebrow rv">Twelve days · August 6&ndash;17</p>
+        <h2 class="h-lg rv d1" style="color:var(--maroon)">Nine finished pieces, made for HT.</h2>
       </div>
-      <p class="rv d2" style="margin:0;color:var(--sable);max-width:44ch">Not a portfolio of other people's work. This is Huston-Tillotson work, made for your office, in the window between your first message and today.</p>
+      <p class="rv d2" style="margin:0;color:var(--sable);max-width:44ch">This is Huston-Tillotson work, made for your office, produced in the window between the first message and today.</p>
     </div>
 
     <div class="bento">
       <figure class="rv">
         <div class="frame fit-contain"><img src="images/proof-carousel.jpg" alt="Move-in day social carousel, cover slide, featuring Dr. Wallace"></div>
-        <figcaption>Social carousel, five slides<span>Delivered August 11. &ldquo;Looks great.&rdquo;</span></figcaption>
+        <figcaption>Social carousel, five slides<span>Delivered August 11, cover plus four interior slides</span></figcaption>
       </figure>
       <figure class="rv d1">
-        <div class="frame fit-contain"><img src="images/proof-carousel-2.jpg" alt="Interior slide of the move-in day carousel"></div>
-        <figcaption>Interior slide, same set<span>One visual system, held across all five</span></figcaption>
+        <div class="frame fit-cover"><img src="images/proof-poster.jpg" alt="Printed move-in day poster shown on a wall"></div>
+        <figcaption>Print, press ready<span>Letter poster at 300 dpi, with a scannable code</span></figcaption>
       </figure>
       <figure class="rv d2">
         <div class="frame fit-contain"><img src="images/proof-email.jpg" alt="Designed HTML email from the Office of the President"></div>
-        <figcaption>Designed HTML email<span>Renders in Gmail and Outlook. &ldquo;Fantastic.&rdquo;</span></figcaption>
+        <figcaption>Designed HTML email<span>Built for desktop and mobile inboxes</span></figcaption>
       </figure>
 
       <figure class="rv">
         <div class="frame fit-contain"><img src="images/proof-video.jpg" alt="Frame from the finished vertical move-in day video"></div>
-        <figcaption>Vertical video, captioned<span>Two cuts produced: her voice, and a student voice</span></figcaption>
+        <figcaption>Vertical video, captioned<span>Two cuts produced: your voice and a student voice</span></figcaption>
       </figure>
       <div class="b-note rv d1">
         <strong>And one nobody asked for.</strong>
-        <p>A working redesign of the htu.edu homepage, built on spec and sent August 7 without a brief. That is the difference between a vendor waiting to be told and a partner watching the calendar.</p>
+        <p>A working redesign of the htu.edu homepage, built on spec and sent August 7. Nobody requested it. It was the fastest way to show what the identity system looks like at full scale, and move-in was coming.</p>
       </div>
       <figure class="rv d2">
         <div class="frame fit-cover"><img src="images/proof-interview.jpg" alt="Dr. Wallace during the filmed studio interview"></div>
@@ -486,7 +561,7 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
     </div>
 
     <div class="two" style="margin-top:clamp(1.6rem,3vw,2.4rem);align-items:center">
-      <p class="rv" style="margin:0;font-size:.88rem;color:var(--sable)">Also delivered in the window: a press-ready move-in poster at 300 dpi, a campaign showcase page, and the promotional graphics for the filmed interview.</p>
+      <p class="rv" style="margin:0;font-size:.88rem;color:var(--sable)">Also delivered in the window: the four interior carousel slides, a second cut of the video with a student host, a campaign showcase page, and the proposal site that started this.</p>
     </div>
   </div>
 </section>
@@ -500,17 +575,14 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
         <p class="eyebrow on-dark rv">The working method</p>
         <h2 class="h-lg rv d1" style="color:var(--sand);max-width:24ch">Two lanes, so a bad travel week never costs you a post.</h2>
       </div>
-      <div class="rv d2">
-        <p class="herquote">&ldquo;So I can send you a raggedy recorded video of me and you can make it better????&rdquo;</p>
-        <p class="herquote-attr">Dr. Wallace, August 16</p>
-      </div>
+      <p class="rv d2" style="margin:0;color:rgba(247,227,184,.84);max-width:44ch">Some weeks there is a window to record and no window to get ready for it. Some weeks there is no window at all. The month has to hold either way, so there are two ways in and you pick per message, not per month.</p>
     </div>
 
     <div class="lanes rv d2">
       <div class="lane">
         <div class="lane-n">01</div>
         <h3 class="h-md">You send us thirty seconds off your phone.</h3>
-        <p>Hotel room, back seat, your office at 9pm. Bad light, no crew, no hair and makeup window. Yes &mdash; send it exactly like that.</p>
+        <p>Hotel room, back seat, ten minutes between meetings. Bad light, no crew, no window to get ready. Send it exactly like that.</p>
         <ul>
           <li>Color corrected and relit so the room stops mattering</li>
           <li>Audio cleaned, room noise pulled out, levels broadcast-normal</li>
@@ -526,8 +598,8 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
         <ul>
           <li>You approve a script; a finished video comes back the same week</li>
           <li>Thirty seconds by design &mdash; the format short-form actually rewards</li>
-          <li>Greetings, welcomes, congratulations, condolences, church invitations</li>
-          <li>One pattern, many recipients: fifty congregations in a Sunday</li>
+          <li>Greetings, welcomes, congratulations, invitations</li>
+          <li>One recording, addressed to many rooms in a single weekend</li>
           <li>Licensed exclusively to your office, revocable in writing at any time</li>
         </ul>
       </div>
@@ -535,12 +607,12 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
 
     <div class="two" style="margin-top:clamp(2.4rem,4.5vw,3.4rem);align-items:start">
       <div class="rv">
-        <p class="eyebrow on-dark">On &ldquo;a little robotic&rdquo;</p>
-        <p style="color:rgba(247,227,184,.86);max-width:46ch;margin:0">You were right, and the note was about length, not likeness. Three and a half minutes is longer than any single locked-off shot holds &mdash; a live human filmed that way reads the same way by minute two. Thirty to forty seconds is the spec now, on both lanes. You found the operating standard before we did.</p>
+        <p class="eyebrow on-dark">Why thirty seconds</p>
+        <p style="color:rgba(247,227,184,.86);max-width:46ch;margin:0">You named it yourself on August 10: <i>maybe I need to use it for shorter scripts</i>. The cut you watched ran 3:25, which is long for one unbroken shot in any form, filmed or otherwise. Thirty seconds is the standard now, on both lanes.</p>
       </div>
       <div class="rv d1">
-        <p class="eyebrow on-dark">On the realistic one you sent</p>
-        <p style="color:rgba(247,227,184,.86);max-width:46ch;margin:0">That style copies a real performance frame by frame, so it needs you on camera to exist &mdash; which is the hour you do not have. Lane 01 is how you get that same living quality out of thirty seconds shot on a phone. Lane 02 is for the weeks even that is too much. Between the two, nothing on your calendar goes uncovered.</p>
+        <p class="eyebrow on-dark">On the reference you sent August 16</p>
+        <p style="color:rgba(247,227,184,.86);max-width:46ch;margin:0">That approach follows a real performance frame by frame, so it needs you on camera to exist at all &mdash; which is the part of the week you do not have. Lane 01 is how you get that same living quality out of thirty seconds shot on a phone. Lane 02 covers the weeks when even that is too much.</p>
       </div>
     </div>
   </div>
@@ -552,14 +624,14 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
   <div class="ghost" style="left:-3vw;bottom:-4%;font-size:clamp(7rem,19vw,19rem);color:rgba(255,204,0,.07)">FALL</div>
   <div class="wrap">
     <p class="eyebrow on-dark rv">Why the month, and not the project</p>
-    <h2 class="h-lg rv d1" style="color:var(--sand);max-width:26ch">The calendar does not wait to be calibrated.</h2>
-    <p class="lede rv d2" style="margin:1.7rem 0 clamp(2.2rem,4vw,3.2rem);color:rgba(255,250,235,.86)">Every one of these arrives whether or not there is a production conversation in front of it. On a standing month, the work is finished before the week starts.</p>
+    <h2 class="h-lg rv d1" style="color:var(--sand);max-width:26ch">The calendar arrives on its own schedule.</h2>
+    <p class="lede rv d2" style="margin:1.7rem 0 clamp(2.2rem,4vw,3.2rem);color:rgba(255,250,235,.86)">Every one of these arrives whether or not there is a call about it first. On a standing month, the work is finished before the week starts.</p>
 
     <div class="cal rv d2">
       <div class="cal-row">
         <div class="cal-when">September</div>
         <div class="cal-what">Welcome Week and Convocation</div>
-        <div class="cal-does">First impressions for a class that just arrived, and the parents who just drove home. The president's welcome, a campus-life carousel, one email to families.</div>
+        <div class="cal-does">First impressions for a class that just arrived, and the parents who just drove home. The president’s welcome, a campus-life carousel, one email to families.</div>
       </div>
       <div class="cal-row">
         <div class="cal-when">October</div>
@@ -568,8 +640,8 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
       </div>
       <div class="cal-row">
         <div class="cal-when">October 31</div>
-        <div class="cal-what">The storybook transformation film</div>
-        <div class="cal-does">The film from your very first message, still on the board. An original costumed transformation piece &mdash; written for you, not borrowed from anyone's property &mdash; built to travel further than anything else you post this year.</div>
+        <div class="cal-what">The costumed transformation film</div>
+        <div class="cal-does">The film from the original ask, still on the board. An original character, written for you, and the piece most likely to be shared well outside your own audience.</div>
       </div>
       <div class="cal-row">
         <div class="cal-when">November&ndash;December</div>
@@ -592,22 +664,42 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
     <div class="two" style="align-items:end;margin-bottom:clamp(2.2rem,4vw,3.2rem)">
       <div>
         <p class="eyebrow rv">Investment</p>
-        <h2 class="h-lg rv d1" style="color:var(--maroon)">Three ways in.<br>Pick the column.</h2>
+        <h2 class="h-lg rv d1" style="color:var(--maroon)">Four ways in.<br>Pick one.</h2>
       </div>
-      <p class="rv d2" style="margin:0;color:var(--sable);max-width:44ch">One creative partner, one monthly number, one invoice. No hourly billing, no per-video pricing, no change orders on a Tuesday.</p>
+      <p class="rv d2" style="margin:0;color:var(--sable);max-width:44ch">One creative partner, one number, one invoice. No hourly billing, no per-video pricing, no change orders mid-month.</p>
     </div>
+
+    <div class="block rv">
+      <div class="block-body">
+        <p class="eyebrow" style="color:var(--gold);margin-bottom:1.1rem">Start here if you would rather not start with a subscription</p>
+        <h3 class="h-md" style="color:var(--sand);max-width:30ch;margin-bottom:1.1rem;line-height:1.08">The Fall Term block.<br>September through November.</h3>
+        <p style="margin:0 0 1.4rem;color:rgba(255,250,235,.86);max-width:52ch">One purchase order, one line item, three months, and the two events that carry the most weight all year sit inside it. It covers everything in The Content Engine for the term, including the costumed transformation film. At the end of November it either continues at the monthly rate or it simply ends, with nothing owed.</p>
+        <ul class="block-list">
+          <li>Welcome Week and Convocation</li>
+          <li>Homecoming, start to finish</li>
+          <li>The costumed transformation film</li>
+          <li>The giving-season kickoff</li>
+        </ul>
+      </div>
+      <div class="block-price">
+        <div class="bp-amt">$10,500</div>
+        <div class="bp-note">for the term<br><span>Three months on one purchase order. The presidential likeness build and license, normally $3,500, is included.</span></div>
+      </div>
+    </div>
+
+    <p class="rv d1" style="margin:clamp(2rem,3.6vw,2.8rem) 0 clamp(1.4rem,2.4vw,1.8rem);font-size:.72rem;letter-spacing:.19em;text-transform:uppercase;font-weight:800;color:var(--maroon);font-variation-settings:'wdth' 108">Or a standing month</p>
 
     <div class="tiers">
       <div class="tier rv">
-        <div class="tier-name">The President's Desk</div>
-        <p class="tier-for">Her voice, covered. The smallest version that still holds a calendar.</p>
+        <div class="tier-name">The President’s Desk</div>
+        <p class="tier-for">Your voice, covered. The smallest version that still holds a calendar.</p>
         <div class="tier-price">$1,800<small>per month</small></div>
         <div class="tier-inc">Each month includes</div>
         <ul>
-          <li><b>Four finished president videos</b> &mdash; either lane, your call each time</li>
+          <li><b>Four finished presidential videos</b> &mdash; either lane, your call each time</li>
           <li>Captions, brand type, end cards, vertical and wide masters</li>
           <li>Script writing and one revision round per video</li>
-          <li>Five business day turnaround, with two rush slots a quarter</li>
+          <li>Five-business-day turnaround, with two rush slots a quarter</li>
           <li>Cloud folder your team can pull from any time</li>
         </ul>
       </div>
@@ -617,10 +709,10 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
         <div class="tier-name">The Content Engine</div>
         <p class="tier-for">The whole front-facing output of the Office of the President, produced monthly.</p>
         <div class="tier-price">$3,500<small>per month</small></div>
-        <div class="tier-inc">Everything in $1,800, plus</div>
+        <div class="tier-inc">Everything in The President&rsquo;s Desk, plus</div>
         <ul>
           <li><b>Twelve social graphics a month</b> &mdash; any mix of single posts and multi-slide carousels</li>
-          <li><b>One designed email campaign a month</b>, built to render in Gmail and Outlook</li>
+          <li><b>One designed email campaign a month</b>, built for desktop and mobile inboxes</li>
           <li>A written content calendar mapped to your event schedule</li>
           <li>A monthly planning call with the Marketing office</li>
           <li>Two rush slots every month instead of every quarter</li>
@@ -628,16 +720,16 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
       </div>
 
       <div class="tier rv d2">
-        <div class="tier-name">The Full Department</div>
-        <p class="tier-for">When the answer to &ldquo;who makes this&rdquo; should be one phone call, whatever it is.</p>
+        <div class="tier-name">The Full Studio</div>
+        <p class="tier-for">When the answer to &ldquo;who makes this?&rdquo; should always be one phone call.</p>
         <div class="tier-price">$6,500<small>per month</small></div>
-        <div class="tier-inc">Everything in $3,500, plus</div>
+        <div class="tier-inc">Everything in The Content Engine, plus</div>
         <ul>
-          <li><b>Web</b> &mdash; landing pages and htu.edu page builds and updates</li>
+          <li><b>Web</b> &mdash; landing pages, plus htu.edu builds and updates</li>
           <li><b>Print</b> &mdash; posters, programs, invitations, press-ready files</li>
-          <li>A licensed student host character for peer-voice content</li>
           <li><b>One production day a month</b> on campus or in studio</li>
           <li>Same-week turnaround as the standard, not the exception</li>
+          <li>A quarterly review with your office on what performed</li>
         </ul>
       </div>
     </div>
@@ -646,12 +738,12 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
       <div class="addon rv">
         <h4>Presidential Likeness Build &amp; License</h4>
         <div class="amt">$3,500<small>one time</small></div>
-        <p>The studio session, the double itself, and an exclusive license to your office. <b style="color:var(--maroon)">Included at no charge with a six-month engagement</b> &mdash; because on a standing month it is infrastructure, not a purchase.</p>
+        <p>The studio session, the double itself, and an exclusive license to your office. <b style="color:var(--maroon)">Included at no charge with the Fall Term block or any standing month</b> &mdash; on a continuing engagement it is infrastructure, not a purchase.</p>
       </div>
       <div class="addon rv d1">
-        <h4>Annual, paid at the start of the term</h4>
-        <div class="amt">Twelve months for ten<small>any tier</small></div>
-        <p>The Content Engine at $35,000 for the year instead of $42,000. One purchase order, one approval, one line item, and the whole year is covered.</p>
+        <h4>Longer terms</h4>
+        <div class="amt">On request<small>priced to your process</small></div>
+        <p>A full-year term costs less per month than a rolling one. Before quoting a figure we would want to know your competitive-bid threshold and your fiscal year, so the term is written to fit your process rather than force a bid you did not plan for.</p>
       </div>
       <div class="addon rv d2">
         <h4>What is not in the monthly</h4>
@@ -666,31 +758,39 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
 <section class="s-ember">
   <div class="wrap">
     <p class="eyebrow rv" style="color:var(--maroon)">How it bills, in university terms</p>
-    <h2 class="h-md rv d1" style="color:var(--maroon);max-width:30ch;margin-bottom:clamp(2rem,3.6vw,2.8rem)">Written to clear procurement, not to survive it.</h2>
+    <h2 class="h-md rv d1" style="color:var(--maroon);max-width:30ch;margin-bottom:clamp(2rem,3.6vw,2.8rem)">Written the way your procurement office prefers to receive it.</h2>
     <div class="terms">
       <div class="term rv d1">
-        <h4>Net 30, invoiced monthly</h4>
-        <p>One invoice on the first, one line item, net 30. Purchase orders welcome and referenced on every invoice. W-9 and certificate of insurance on file before the first deliverable.</p>
+        <h4>A contractor agreement against a scope of work</h4>
+        <p>Whatever instrument your office prefers &mdash; an independent contractor agreement, a PO issued against a written scope, or your own standard vendor paperwork. We will sign yours rather than ask you to review ours.</p>
       </div>
       <div class="term rv d2">
-        <h4>Aligned to your fiscal year</h4>
-        <p>Tell us your fiscal year start and the term is written to end on it, so this never lands as an orphan commitment across two budgets. Renewal conversation happens sixty days out, in writing.</p>
+        <h4>Net 30, invoiced monthly</h4>
+        <p>One invoice, one line item, net 30. Purchase orders welcome and referenced on every invoice. W-9 provided on request, and any certificate of insurance your office requires before the first deliverable.</p>
       </div>
       <div class="term rv d3">
-        <h4>Thirty days, either direction</h4>
-        <p>Cancel with thirty days' written notice, for any reason, with no penalty and no unfinished-work clause. Everything delivered stays yours, source files included.</p>
+        <h4>Ninety days, then thirty at a time</h4>
+        <p>An initial term of ninety days so a September ramp is not stranded, then month to month with thirty days&rsquo; written notice either direction, no penalty and no unfinished-work clause.</p>
       </div>
       <div class="term rv d4">
-        <h4>Your office approves everything</h4>
-        <p>Every script and every finished file gets a yes from the Office of the President before it exists publicly. Brand exceptions route to Dr. Dillon per the guidelines. Nothing is posted by us on your behalf without written instruction.</p>
+        <h4>Aligned to your fiscal year</h4>
+        <p>Tell us your fiscal year start and the term is written to end on it, so this never lands as an orphan commitment across two budgets. Renewal is discussed sixty days out, in writing.</p>
       </div>
       <div class="term rv d5">
-        <h4>Likeness authorization, signed first</h4>
-        <p>Before a single frame of the double renders: exclusive to your office, your approval on every script, no political use, no third-party use, no training of anything on your likeness, revocable in writing with the model deleted on request.</p>
+        <h4>Your office approves everything</h4>
+        <p>Every script and every finished file gets a yes from the Office of the President before it exists publicly. Brand exceptions route to Dr. Dillon for approval. Nothing is posted by us on your behalf without written instruction.</p>
       </div>
       <div class="term rv d6">
+        <h4>Likeness authorization, signed first</h4>
+        <p>Before a single frame of the double renders: exclusive to your office, your approval on every script, no political use, no third-party use, nothing trained on your likeness, revocable in writing with the likeness files deleted on request.</p>
+      </div>
+      <div class="term rv d1">
+        <h4>How we would handle disclosure</h4>
+        <p>Our recommendation, and yours to overrule: anything published externally carries a short production note, and the double is used for greetings, welcomes and messages to rooms you were invited to &mdash; never for news, crisis communication, or any statement of fact a reader would need to trust as live. That line is written into the scope, not left to judgment.</p>
+      </div>
+      <div class="term rv d2">
         <h4>You own the work</h4>
-        <p>Full rights to every finished deliverable transfer to Huston-Tillotson on payment. Editable source files handed over on request, in formats your team can open without us.</p>
+        <p>Full rights to every finished deliverable transfer to Huston-Tillotson on payment, with editable source files on request in formats your team can open without us. The likeness model itself stays licensed rather than transferred, so that its use remains governed by the authorization above.</p>
       </div>
     </div>
   </div>
@@ -702,32 +802,44 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
   <div class="wrap two-tight">
     <div class="sticky-col">
       <p class="eyebrow on-dark rv">To start on the first</p>
-      <h2 class="h-lg rv d1" style="color:var(--ember)">Four things,<br>none of them long.</h2>
-      <p class="rv d2" style="margin-top:1.6rem;color:rgba(247,227,184,.76);max-width:34ch">Every one of these is a decision your two offices already own. There is nothing here that needs a committee.</p>
+      <h2 class="h-lg rv d1" style="color:var(--ember)">Six things,<br>none of them long.</h2>
+      <p class="rv d2" style="margin-top:1.6rem;color:rgba(247,227,184,.76);max-width:34ch">Each one sits with your two offices, and most are a single reply. The first three are all we need to start building September.</p>
     </div>
     <ol class="needs rv d1">
       <li>
         <div>
-          <h4>A column</h4>
-          <p>President's Desk, Content Engine, or Full Department &mdash; and whether the term is monthly or the annual. That single answer sets everything else in motion.</p>
+          <h4>Which way in</h4>
+          <p>The Fall Term block, or a standing month and which of the three. That single answer sets everything else in motion.</p>
         </div>
       </li>
       <li>
         <div>
           <h4>The master event calendar</h4>
-          <p>Whatever your Marketing office already keeps. It becomes the production schedule, and every deliverable gets dated backward from it.</p>
+          <p>Whatever your Marketing office already keeps. It becomes the production schedule, and every deliverable gets dated backward from it. It also settles the dates left open in the fall calendar above.</p>
         </div>
       </li>
       <li>
         <div>
-          <h4>Brand vectors and the Ram Connect confirmation</h4>
-          <p>SVG or EPS files for the marks and patterns, and written confirmation that htu.edu/ram-connect is the destination you want students sent to. Both from Marketing, both quick.</p>
+          <h4>Brand vectors, and the student destination</h4>
+          <p>SVG or EPS files for the marks and patterns, and written confirmation of the URL you want students sent to for account and enrollment questions. Both from Marketing, both quick.</p>
         </div>
       </li>
       <li>
         <div>
           <h4>The likeness authorization, signed</h4>
           <p>One page, drafted and ready for your counsel to read. It gets signed before the first render of the double, every time, without being asked for.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Your paperwork and your thresholds</h4>
+          <p>The vendor agreement your office uses, your competitive-bid threshold, and your fiscal year start. Those three numbers decide how the term is written, and we would rather fit your process than test it.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Where the numbers stand today</h4>
+          <p>Current reach and engagement on the channels this touches, and whatever you already track on enrollment yield or giving participation. Not to promise against &mdash; to report against, so by month two there is a real figure rather than an impression.</p>
         </div>
       </li>
     </ol>
@@ -739,9 +851,14 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
   <div class="close-bg"></div>
   <div class="close-veil"></div>
   <div class="wrap" style="position:relative;z-index:2">
-    <p class="eyebrow on-dark rv">In your words</p>
+    <p class="eyebrow on-dark rv">The next step</p>
     <h2 class="h-lg rv d1">&ldquo;When can we <em>start</em>??&rdquo;</h2>
-    <p class="lede rv d2" style="margin:1.9rem 0 0;color:rgba(255,250,235,.88);max-width:46ch">You asked that on August 6, and then told us we were already behind. So: pick a column and the September calendar is written this week &mdash; scripts, delivery dates and all &mdash; before a single invoice is sent.</p>
+    <p class="lede rv d2" style="margin:1.9rem 0 1.7rem;color:rgba(255,250,235,.88);max-width:48ch">You asked that on August 6. Here is the shortest honest answer: twenty minutes on the phone with both of your offices this week, and then the first week of the term is on paper.</p>
+    <ol class="steps rv d2">
+      <li><span>Week one</span>A twenty-minute call with the Office of the President and Marketing together. No paperwork, no pricing debate &mdash; scope and calendar.</li>
+      <li><span>Week two</span>A one-page scope of work reflecting whatever we agreed, plus the likeness authorization for your counsel.</li>
+      <li><span>On signature</span>The September calendar, dated, with scripts drafted and delivery dates set. First invoice follows the first delivery, not the signature.</li>
+    </ol>
     <dl class="sign rv d3">
       <div><dt>Prepared by</dt><dd>Elliott Taylor<br>Taylormade Creative</dd></div>
       <div><dt>Email</dt><dd><a href="mailto:taylormademd@gmail.com">taylormademd@gmail.com</a></dd></div>
@@ -754,7 +871,7 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
 <footer>
   <div class="wrap">
     <img src="images/ht-wordmark-gold.png" alt="Huston-Tillotson University">
-    <p>Confidential. Prepared for the Office of the President and the Office of Marketing, Strategy, Impact &amp; Innovation at Huston-Tillotson University. Colors, marks and typography per the HT Brand Identity System, June 2026. Pricing valid through September 30, 2026.</p>
+    <p>Confidential. Prepared for Dr. Melva K. Wallace, 7th President and CEO, and Dr. Shaquille K. Dillon, VP for Marketing, Strategy, Impact &amp; Innovation, Huston-Tillotson University. Colors, marks and supporting graphics per the HT Brand Identity System, June 2026.</p>
   </div>
 </footer>
 </main>
