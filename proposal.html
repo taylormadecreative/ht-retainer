@@ -25,7 +25,6 @@
   --ease:cubic-bezier(.23,1,.32,1);
 
   /* one scale, ratios: ghost/display 2.9, display/head 2.09, head/sub 2.10, sub/body 1.46 */
-  --t-ghost:  clamp(4.5rem,22vw,21rem);
   --t-display:clamp(3.2rem,7.6vw,6.8rem);
   --t-head:   clamp(2rem,3.6vw,3.25rem);
   --t-sub:    clamp(1.25rem,1.6vw,1.55rem);
@@ -65,24 +64,17 @@ p:last-child{margin-bottom:0}
 section{position:relative;overflow:hidden;padding:var(--pv) var(--pad)}
 .wrap{max-width:1240px;margin:0 auto;position:relative;z-index:3}
 
-/* the monogram pattern lives in exactly two places, at two extreme scales */
-.pat-xl{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.05;
-  background:url("images/monogram-tile.png") center/900px auto repeat}
-
 /* ============ the house editorial spread ============
    oversized tone-on-tone word cut by one edge, full-bleed photo floated over it,
    white serif line centred on the image, monogram top centre, wordmark bottom centre. */
 .spread{--pv:clamp(3.4rem,8vh,5.5rem);background:var(--mahogany);color:var(--sand)}
-.ghost{position:absolute;z-index:1;font-family:var(--serif);font-weight:700;
-  font-size:var(--t-ghost);line-height:.72;letter-spacing:-.05em;white-space:nowrap;
-  color:rgba(255,250,235,.07);pointer-events:none;user-select:none}
 .mono-top{position:absolute;top:clamp(1rem,2.4vh,1.7rem);left:50%;transform:translateX(-50%);
   z-index:4;height:26px;width:auto;opacity:.9}
 .mark-bottom{position:absolute;bottom:clamp(1rem,2.4vh,1.7rem);left:50%;transform:translateX(-50%);
   z-index:4;height:24px;width:auto}
 .bleed{position:relative;z-index:2;width:calc(100% + 2 * var(--pad));
   margin-inline:calc(-1 * var(--pad));overflow:hidden}
-.bleed img{width:100%;height:100%;object-fit:cover}
+.bleed img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
 .bleed figcaption{
   position:absolute;inset:0;display:grid;align-items:end;justify-items:center;
   padding:0 1.6rem clamp(1.6rem,4vw,3rem);text-align:center;
@@ -91,11 +83,10 @@ section{position:relative;overflow:hidden;padding:var(--pv) var(--pad)}
 }
 
 /* ---------- 1. cover ---------- */
-.cover .ghost{right:-6%;top:1.5%}
-.cover-head{position:relative;z-index:3;padding-top:clamp(1.6rem,4vh,2.6rem)}
+.cover .cover-head{position:relative;z-index:3;padding-top:clamp(1.6rem,4vh,2.6rem)}
 .cover h1{max-width:19ch}
 .cover h1 em{font-style:normal;color:var(--gold)}
-.cover-bleed{height:clamp(250px,32vw,430px);margin-top:clamp(1.6rem,4vh,2.6rem)}
+.cover-bleed{height:clamp(265px,34vw,505px);margin-top:clamp(1.6rem,4vh,2.6rem)}
 .cover-meta{position:relative;z-index:3;margin:clamp(1.2rem,3vh,1.9rem) 0 clamp(2.2rem,5vh,3.2rem);
   text-align:center;color:rgba(255,250,235,.62)}
 .cover-meta b{color:var(--gold)}
@@ -131,9 +122,7 @@ section{position:relative;overflow:hidden;padding:var(--pv) var(--pad)}
 .three-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(1rem,2.4vw,2rem);margin-top:clamp(2rem,5vw,3rem)}
 .thing figure{position:relative;overflow:hidden;aspect-ratio:4/5;
-  border:1px solid rgba(102,1,0,.18);background:var(--sand)}
-.thing figure::before{content:"";position:absolute;inset:0;opacity:.07;
-  background:url("images/monogram-tile-maroon.png") center/120px auto repeat}
+  border:1px solid rgba(102,1,0,.18);background:#F6EFDD}
 .thing img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7%;
   transition:transform 1s var(--ease)}
 .thing figure.crop img{object-fit:cover;padding:0}
@@ -143,8 +132,7 @@ section{position:relative;overflow:hidden;padding:var(--pv) var(--pad)}
 
 /* ---------- 5. caesura ---------- */
 .caesura{--pv:clamp(2.4rem,6vh,4rem);background:var(--terra);color:var(--sand)}
-.caesura .ghost{left:-6%;bottom:1%}
-.caesura .bleed{height:clamp(300px,38vw,540px)}
+.caesura .caesura .bleed{height:clamp(300px,38vw,540px)}
 
 /* ---------- 6. the term ---------- */
 .term{--pv:clamp(4.6rem,12vh,8rem);background:var(--mahogany)}
@@ -254,7 +242,6 @@ html.no-js .rv{opacity:1;transform:none}
 }
 @media (max-width:640px){
   .three-grid{grid-template-columns:minmax(0,1fr)}
-  .pat-xl{background-size:420px auto}
   .cover-bleed{height:265px}
   .caesura .bleed{height:250px}
   .bleed figcaption{font-size:1.02rem;padding-bottom:1.05rem}
@@ -272,8 +259,6 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
 
 <!-- 1. COVER, house editorial spread -->
 <section class="spread cover">
-  <div class="pat-xl"></div>
-  <div class="ghost" aria-hidden="true">PRESIDENT</div>
   <img class="mono-top" src="images/ht-monogram-gold.png" alt="">
   <div class="wrap cover-head">
     <h1 class="display rv">No more<br><em>regrets</em>.</h1>
@@ -364,7 +349,6 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
 
 <!-- 5. CAESURA, house editorial spread -->
 <section class="spread caesura">
-  <div class="ghost" aria-hidden="true">PRESENCE</div>
   <img class="mono-top" src="images/ht-monogram-gold.png" alt="">
   <figure class="bleed rv">
     <img src="images/film-spread.jpg" alt="A graduate being hooded at commencement, hands pressed together">
