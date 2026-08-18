@@ -168,6 +168,25 @@ section{position:relative;overflow:hidden;padding:var(--pv) var(--pad)}
 .tier-mid li{color:rgba(255,250,235,.94)}
 .tier-mid li::before{background:rgba(255,204,0,.75)}
 .tier-mid li b{color:#fff}
+.tier-cta{display:block;text-align:center;margin-top:1.5rem;padding:.85rem 1rem;
+  text-decoration:none;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:800;font-variation-settings:"wdth" 112;
+  background:var(--maroon);color:var(--sand);
+  transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.tier-cta:active{transform:scale(.97)}
+.tier-mid .tier-cta{background:var(--gold);color:var(--mahogany)}
+.custom{margin-top:clamp(.9rem,1.6vw,1.3rem);border:1px solid rgba(102,1,0,.24);
+  padding:clamp(1.4rem,2.4vw,2rem);display:flex;flex-wrap:wrap;gap:1.2rem 2.5rem;
+  align-items:center;justify-content:space-between}
+.custom h3{color:var(--maroon);font-size:var(--t-sub);margin:0 0 .35rem}
+.custom p{margin:0;font-size:.92rem;color:var(--sable);max-width:52ch}
+.custom-links{display:flex;gap:.8rem;flex-wrap:wrap}
+.custom-links a{text-decoration:none;padding:.8rem 1.4rem;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:800;font-variation-settings:"wdth" 112;
+  transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.custom-links a:active{transform:scale(.97)}
+.custom-links a.txt{background:var(--maroon);color:var(--sand)}
+.custom-links a.eml{border:1px solid rgba(102,1,0,.4);color:var(--maroon)}
 .fine{margin-top:clamp(1.6rem,3vw,2.2rem);display:grid;
   grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.8rem 2.4rem;
   border-top:1px solid rgba(102,1,0,.18);padding-top:1.5rem}
@@ -388,6 +407,7 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
           <li>One designed email a month</li>
           <li>Scripts written, one revision round each</li>
         </ul>
+        <a class="tier-cta" href="sms:+18177071291&body=Elliott%2C%20let%27s%20do%20Presence%20for%20the%20fall.%20Here%27s%20my%20window%20this%20week%3A%20">Start with Presence</a>
       </div>
       <div class="tier tier-mid rv s2">
         <h3>The Fall Term <span style="color:rgba(255,204,0,.75)">&middot; recommended</span></h3>
@@ -402,6 +422,7 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
           <li>A content calendar built from your event schedule</li>
           <li>A monthly call with your office to set the next one</li>
         </ul>
+        <a class="tier-cta" href="sms:+18177071291&body=Elliott%2C%20let%27s%20do%20the%20Fall%20Term.%20Here%27s%20my%20window%20this%20week%3A%20">Start the Fall Term</a>
       </div>
       <div class="tier rv s3">
         <h3>Full Term</h3>
@@ -415,6 +436,17 @@ if(new URLSearchParams(location.search).has('static'))document.documentElement.c
           <li>The costumed film, and Homecoming covered on the day</li>
           <li><b>One production day a month</b>, on campus or in studio</li>
         </ul>
+        <a class="tier-cta" href="sms:+18177071291&body=Elliott%2C%20let%27s%20do%20the%20Full%20Term.%20Here%27s%20my%20window%20this%20week%3A%20">Start the Full Term</a>
+      </div>
+    </div>
+    <div class="custom rv s3">
+      <div>
+        <h3>Or something custom.</h3>
+        <p>If none of these is the shape you want, tell me what you have in mind and I will build the column around it.</p>
+      </div>
+      <div class="custom-links">
+        <a class="txt" href="sms:+18177071291&body=Elliott%2C%20I%20have%20something%20different%20in%20mind%3A%20">Text me</a>
+        <a class="eml" href="mailto:taylormademd@gmail.com?subject=Something%20custom%20for%20the%20fall">Email me</a>
       </div>
     </div>
     <div class="fine rv s3">
