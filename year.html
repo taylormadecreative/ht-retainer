@@ -1,0 +1,212 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HT · The Year</title>
+<meta name="description" content="Huston-Tillotson University × Taylormade Creative — the twelve-month partnership, September 2026 through August 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Archivo:wdth,wght@100,400..800;125,400..800&display=swap" rel="stylesheet">
+<style>
+:root{--maroon:#660100;--mahogany:#3B0000;--gold:#FFCC00;--sand:#FFFAEB;--ember:#F7E3B8;--terra:#291C14;--brick:#8F0000}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--maroon);color:var(--sand);font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:0 48px}
+.eyebrow{font-stretch:125%;font-weight:700;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+
+/* COVER */
+.cover{padding:96px 0 80px;border-bottom:1px solid rgba(255,250,235,.18)}
+h1{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(56px,11vw,132px);line-height:.92;letter-spacing:-.02em;margin:18px 0 0}
+h1 em{font-style:italic;color:var(--gold)}
+.lede{font-size:19px;line-height:1.55;color:var(--ember);max-width:600px;margin-top:26px}
+.covermeta{display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,250,235,.18)}
+.covermeta div b{display:block;font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.covermeta div span{font-size:15px;color:var(--sand)}
+
+/* SECTION */
+section{padding:76px 0;border-bottom:1px solid rgba(255,250,235,.18)}
+h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(32px,4.4vw,54px);line-height:1.05;margin:12px 0 0}
+.intro{font-size:16.5px;color:var(--ember);max-width:620px;margin-top:16px;line-height:1.6}
+
+/* LINES */
+.line{display:grid;grid-template-columns:64px 1fr 220px;gap:28px;align-items:start;padding:34px 0;border-top:1px solid rgba(255,250,235,.14)}
+.line:first-of-type{border-top:none}
+.num{font-family:'Source Serif 4',serif;font-size:44px;font-weight:600;color:var(--gold);line-height:.9}
+.line h3{font-family:'Source Serif 4',serif;font-size:27px;font-weight:600;line-height:1.15}
+.line p{font-size:15px;color:var(--ember);margin-top:9px;line-height:1.6;max-width:560px}
+.line ul{margin-top:14px;list-style:none;display:grid;gap:7px}
+.line li{font-size:14px;color:var(--ember);padding-left:17px;position:relative;line-height:1.5}
+.line li:before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;background:var(--gold)}
+.price{text-align:right}
+.price .amt{font-family:'Source Serif 4',serif;font-size:40px;font-weight:600;line-height:1;color:var(--sand);display:block}
+.price .per{font-stretch:125%;font-weight:700;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:7px;display:block}
+
+/* TOTAL */
+.total{background:var(--sand);color:var(--terra);padding:44px 48px;margin-top:44px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+.total .lbl{font-family:'Source Serif 4',serif;font-size:29px;font-weight:600}
+.total .lbl span{display:block;font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick);margin-bottom:7px}
+.total .big{font-family:'Source Serif 4',serif;font-size:64px;font-weight:600;line-height:.9;color:var(--maroon)}
+
+/* TERMS */
+.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:34px}
+.tcard{border:1px solid rgba(255,250,235,.2);padding:26px 24px}
+.tcard b{display:block;font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.tcard .fig{font-family:'Source Serif 4',serif;font-size:34px;font-weight:600;line-height:1;margin-bottom:9px}
+.tcard p{font-size:14px;color:var(--ember);line-height:1.55}
+
+/* DELIVERED */
+.delivered{background:var(--mahogany);padding:38px 44px;margin-top:8px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.delivered h3{font-family:'Source Serif 4',serif;font-size:26px;font-weight:600}
+.delivered p{font-size:14.5px;color:var(--ember);margin-top:8px;max-width:600px;line-height:1.6}
+.delivered .amt{font-family:'Source Serif 4',serif;font-size:44px;font-weight:600;color:var(--gold);white-space:nowrap}
+
+/* LATER */
+.later{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.lcard{border-top:2px solid var(--gold);padding-top:18px}
+.lcard b{font-family:'Source Serif 4',serif;font-size:20px;font-weight:600;display:block;margin-bottom:7px}
+.lcard p{font-size:13.5px;color:var(--ember);line-height:1.55}
+
+/* CLOSE */
+.close{padding:96px 0 88px;text-align:center;border-bottom:none}
+.close h2{max-width:800px;margin:0 auto}
+.close p{font-size:17px;color:var(--ember);max-width:560px;margin:20px auto 0;line-height:1.6}
+.cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:34px}
+.btn{display:inline-block;padding:17px 34px;background:var(--gold);color:var(--maroon);text-decoration:none;font-stretch:125%;font-weight:800;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;transition:transform .18s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+footer{padding:26px 0 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,227,184,.6);font-stretch:125%}
+
+@media(max-width:880px){
+.wrap{padding:0 24px}
+.cover{padding:56px 0 46px}
+section{padding:52px 0}
+.line{grid-template-columns:1fr;gap:12px}
+.num{font-size:34px}
+.price{text-align:left}
+.price .amt{font-size:34px}
+.total{padding:30px 26px}
+.total .big{font-size:48px}
+.terms,.later{grid-template-columns:1fr}
+.delivered{grid-template-columns:1fr;padding:28px 26px}
+}
+</style></head><body>
+
+<div class="wrap">
+
+<header class="cover">
+<div class="eyebrow">Huston-Tillotson University × Taylormade Creative</div>
+<h1>The <em>year.</em></h1>
+<p class="lede">You asked for it spread across the year, with the landing pages folded in and without the everyday posting. Here it is — twelve months, three lines, one page.</p>
+<div class="covermeta">
+<div><b>Term</b><span>September 2026 – August 2027</span></div>
+<div><b>Rhythm</b><span>Periodic — built around your moments</span></div>
+<div><b>Billing</b><span>Quarterly, in advance</span></div>
+<div><b>Runs through</b><span>Marketing, Strategy, Impact &amp; Innovation</span></div>
+</div>
+</header>
+
+<section>
+<div class="eyebrow">What the year covers</div>
+<h2>Three lines.</h2>
+<p class="intro">Everything you named on Thursday lives inside one of these. Nothing here is priced per piece, so nobody has to ask permission to use it.</p>
+
+<div class="line">
+<div class="num">01</div>
+<div>
+<h3>The content partnership</h3>
+<p>The engine, reshaped the way you asked: not everyday posting, but every moment covered. When something matters — an announcement, an event, Homecoming, the sesquicentennial, a giving push — it gets made, and it gets made fast.</p>
+<ul>
+<li>Video in both lanes: footage you record on your phone, polished — or your approved likeness when there is no window to record at all</li>
+<li>Announcement videos, including the student ambassador voice for campus notices</li>
+<li>Social content built around the calendar you actually keep</li>
+<li>Campaign creative for the moments that carry a number</li>
+<li>Your team keeps the newsletter; every Thursday they receive that week's assets ready to drop in</li>
+</ul>
+</div>
+<div class="price"><span class="amt">$19,500</span><span class="per">per year</span></div>
+</div>
+
+<div class="line">
+<div class="num">02</div>
+<div>
+<h3>The landing page program</h3>
+<p>Ten pages across the year, at the standard rate. Thursday proved the case better than any argument could: two of them, built in an afternoon, in front of a foundation the same day.</p>
+<ul>
+<li>Personalized donor pages — their name, their gift, where it went, what it built</li>
+<li>Campaign and priority pages, like For Such a Time as This</li>
+<li>Foundation and board reporting, presentation-ready on a shared screen</li>
+<li>Every page also delivered as a sendable document when a link is not the right form</li>
+<li>Same-day turnarounds count as one and a quarter against the ten — never at a higher price</li>
+<li>Unused pages roll forward one quarter</li>
+</ul>
+</div>
+<div class="price"><span class="amt">$12,000</span><span class="per">per year · ten pages</span></div>
+</div>
+
+<div class="line">
+<div class="num">03</div>
+<div>
+<h3>The president's likeness</h3>
+<p>The studio session, the character build, the voice, and the exclusive license — so the likeness that already exists becomes the university's, on paper, before anything else renders.</p>
+<ul>
+<li>Licensed exclusively to Huston-Tillotson; never used for another institution</li>
+<li>Never used for news or crisis communication — written into the scope, not left to judgment</li>
+<li>Every script approved by your office before anything is made</li>
+<li>One-time build; the videos it produces are covered inside line one</li>
+</ul>
+</div>
+<div class="price"><span class="amt">$3,500</span><span class="per">one time</span></div>
+</div>
+
+<div class="total">
+<div class="lbl"><span>Year one, all three lines</span>September 2026 – August 2027</div>
+<div class="big">$35,000</div>
+</div>
+</section>
+
+<section>
+<div class="eyebrow">How it is paid</div>
+<h2>Quarterly, in advance.</h2>
+<p class="intro">The spread you asked for. Nothing is invoiced after the fact, and the work begins the day the first payment clears.</p>
+<div class="terms">
+<div class="tcard"><b>On signature</b><div class="fig">$11,375</div><p>First quarter of the partnership, plus the one-time likeness build. Work begins immediately.</p></div>
+<div class="tcard"><b>Then quarterly</b><div class="fig">$7,875</div><p>December 1, March 1, and June 1 — each billed in advance of the quarter it covers.</p></div>
+<div class="tcard"><b>Standard terms</b><div class="fig">2 rounds</div><p>Two rounds of edits on every deliverable. Nothing publishes without your office's same-day sign-off.</p></div>
+</div>
+
+<div class="delivered">
+<div>
+<h3>Already delivered — August 20</h3>
+<p>For Such a Time as This and the Moody Foundation year in review, both built and live the same afternoon they were requested. Invoiced separately at the standard page rate with same-day turnaround. If the year is signed by September 1, both count against your first ten pages.</p>
+</div>
+<div class="amt">$3,000</div>
+</div>
+</section>
+
+<section>
+<div class="eyebrow">Not in this number</div>
+<h2>The bigger builds.</h2>
+<p class="intro">Named on Thursday, deliberately left out. Each one is a real project and deserves a real number rather than one folded quietly into a retainer.</p>
+<div class="later">
+<div class="lcard"><b>The university app</b><p>Scoped after meeting with Mr. Woodson — the foundation exists, and the fastest path is getting it through Apple review with push notifications live.</p></div>
+<div class="lcard"><b>The student ambassador, officially</b><p>Making Ada the university's own means a licensing agreement so she belongs to HT and no one else. Its own paper, its own number.</p></div>
+<div class="lcard"><b>Print and large format</b><p>Signage, wayfinding, brochures, apparel. Quoted per job, whenever you need it.</p></div>
+</div>
+</section>
+
+<section class="close">
+<div class="eyebrow">One reply</div>
+<h2>Say go, and the first quarter starts Tuesday.</h2>
+<p>September is the month the year is built on — it asks for nothing and lets people fall in love first, so November can ask twice.</p>
+<div class="cta">
+<a class="btn" href="sms:+18177071291&body=Let%27s%20go%20%E2%80%94%20HT%20for%20the%20year.">Text me</a>
+<a class="btn ghost" href="mailto:taylormademd@gmail.com?subject=HT%20%C3%97%20Taylormade%20%E2%80%94%20The%20Year">Email me</a>
+</div>
+</section>
+
+<footer>
+<span>Where every soul finds its strength.</span>
+<span>Taylormade Creative · August 20, 2026</span>
+</footer>
+
+</div>
+</body></html>
