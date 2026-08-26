@@ -1,0 +1,411 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Fall, Mapped</title>
+<meta name="description" content="Huston-Tillotson University fall 2026 content map, built from the academic calendar. Draft for discussion. Taylormade Creative.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Archivo:wdth,wght@100,400..800;125,400..800&display=swap" rel="stylesheet">
+<style>
+:root{
+--maroon:oklch(24% .09 25);--mahogany:oklch(18% .07 25);--deep:oklch(14% .05 25);
+--gold:#FFCC00;--honey:#D68A2B;--sand:#FFFAEB;--ember:#F7E3B8;--terra:#291C14;--brick:#8F0000;
+--out:cubic-bezier(0.23,1,0.32,1);--inout:cubic-bezier(0.77,0,0.175,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--maroon);color:var(--sand);font-family:'Archivo',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.serif{font-family:'Source Serif 4',serif}
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(22px,5vw,56px)}
+.eyebrow{font-stretch:125%;font-weight:700;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+
+.ground{position:fixed;inset:0;z-index:-2;background:
+ radial-gradient(120% 90% at 15% -10%, oklch(30% .11 25) 0%, transparent 55%),
+ radial-gradient(90% 70% at 95% 110%, oklch(20% .08 40) 0%, transparent 50%),
+ var(--maroon)}
+.grain{position:fixed;inset:-50%;z-index:-1;pointer-events:none;opacity:.05;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;
+ padding:18px clamp(22px,5vw,56px);transition:background .4s var(--out)}
+nav.scrolled{background:oklch(18% .07 25 / .9);backdrop-filter:blur(10px)}
+nav .mark{font-family:'Source Serif 4',serif;font-weight:700;font-size:16px;letter-spacing:.04em}
+nav .mark span{color:var(--gold)}
+nav .for{font-stretch:125%;font-weight:700;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ember)}
+#progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:61;background:var(--gold);transform:scaleX(0);transform-origin:left;will-change:transform}
+
+/* HERO: editorial split, huge negative space */
+.hero{min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding-top:90px;position:relative}
+.hero h1{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(52px,10.5vw,124px);line-height:.98;letter-spacing:-.02em;max-width:10ch}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .sub{margin-top:30px;max-width:52ch;font-size:clamp(15.5px,1.9vw,17.5px);color:var(--ember)}
+.hero .sub b{color:var(--sand);font-weight:600}
+.js .line{display:block;overflow:hidden}
+.js .line>span{display:inline-block;transform:translateY(110%);transition:transform .9s var(--out)}
+.js .hero.in .line>span{transform:translateY(0)}
+.js .hero.in .line:nth-child(2)>span{transition-delay:.09s}
+.js .hero .sub,.js .hero .eyebrow{opacity:0;transform:translateY(14px);transition:opacity .8s var(--out) .45s,transform .8s var(--out) .45s}
+.js .hero.in .sub,.js .hero.in .eyebrow{opacity:1;transform:none}
+.js .hero .eyebrow{transition-delay:.15s}
+
+/* MARQUEE */
+.marq{overflow:hidden;border-top:1px solid oklch(100% 0 0 / .16);border-bottom:1px solid oklch(100% 0 0 / .16);padding:20px 0;margin-top:10svh}
+.marq-track{display:flex;gap:0;width:max-content;animation:marq 36s linear infinite}
+.marq span{font-family:'Source Serif 4',serif;font-style:italic;font-size:clamp(17px,2.4vw,23px);color:var(--ember);white-space:nowrap;padding-right:18px}
+.marq span::after{content:"·";color:var(--gold);padding-left:18px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+section{padding:clamp(90px,14vh,170px) 0;position:relative}
+h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(30px,5vw,48px);line-height:1.06;margin-top:12px;letter-spacing:-.01em;max-width:20ch}
+.intro{margin-top:18px;max-width:54ch;font-size:16px;color:var(--ember)}
+
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--out),transform .8s var(--out)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.d-1{transition-delay:.07s}.js .rv.d-2{transition-delay:.14s}.js .rv.d-3{transition-delay:.21s}
+
+/* TIMELINE */
+.timeline{position:relative;margin-top:64px}
+.spine{position:absolute;top:6px;bottom:6px;left:7px;width:2px;background:oklch(100% 0 0 / .12)}
+.spine-fill{position:absolute;inset:0;background:linear-gradient(var(--gold),var(--honey));transform:scaleY(0);transform-origin:top;will-change:transform}
+.moment{position:relative;display:grid;grid-template-columns:170px 1fr;gap:clamp(20px,4vw,54px);padding:0 0 clamp(52px,7vh,84px) 44px}
+.moment:last-child{padding-bottom:8px}
+.moment::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;
+ border:2px solid oklch(100% 0 0 / .3);background:var(--maroon);transition:border-color .45s var(--out),background .45s var(--out),transform .45s var(--out)}
+.moment.lit::before{border-color:var(--gold);background:var(--gold);transform:scale(1.15)}
+.moment .date{font-stretch:125%;font-weight:800;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding-top:4px;line-height:1.7}
+.moment .date small{display:block;font-weight:600;font-size:10.5px;letter-spacing:.14em;color:var(--ember)}
+.moment h3{font-family:'Source Serif 4',serif;font-size:clamp(23px,3.4vw,32px);font-weight:600;line-height:1.12}
+.moment .why{font-family:'Source Serif 4',serif;font-style:italic;font-size:16.5px;color:var(--ember);margin-top:8px;max-width:52ch}
+.moment ul{margin-top:16px;list-style:none;display:grid;gap:8px;max-width:60ch}
+.moment li{font-size:14.5px;color:var(--ember);padding-left:18px;position:relative;line-height:1.5}
+.moment li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:2px;background:var(--gold)}
+.moment .now{display:inline-block;margin-left:10px;padding:3px 9px;border:1px solid var(--gold);color:var(--gold);
+ font-stretch:125%;font-weight:700;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;vertical-align:middle}
+
+/* CHAPTER STACK */
+.chapters{position:relative}
+.chapter{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;border-top:1px solid oklch(100% 0 0 / .18)}
+.ch-1{background:linear-gradient(oklch(24% .09 25),oklch(21% .085 25))}
+.ch-2{background:linear-gradient(oklch(18% .07 25),oklch(16% .065 25))}
+.ch-3{background:var(--sand);color:var(--terra)}
+.chapter .inner{width:100%;padding:80px 0}
+.chapter .mo{font-stretch:125%;font-weight:800;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.ch-3 .mo{color:var(--brick)}
+.chapter h3{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(42px,8vw,88px);line-height:1;margin-top:16px;letter-spacing:-.015em}
+.chapter h3 em{font-style:italic;color:var(--gold)}
+.ch-3 h3 em{color:var(--brick)}
+.chapter p{margin-top:24px;max-width:46ch;font-size:clamp(16px,2vw,18.5px);color:var(--ember);line-height:1.6}
+.ch-3 p{color:oklch(38% .05 45)}
+.chapter .law{margin-top:30px;font-family:'Source Serif 4',serif;font-style:italic;font-size:clamp(17px,2.4vw,22px);max-width:40ch;color:var(--sand)}
+.ch-3 .law{color:var(--terra)}
+.chapter .law span{color:var(--gold)}
+.ch-3 .law span{color:var(--brick)}
+
+/* QUESTIONS */
+.qs{margin-top:56px;display:grid;gap:12px}
+.q{border:1px solid oklch(100% 0 0 / .2);padding:clamp(26px,4vw,44px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,36px);align-items:start;
+ transition:border-color .35s var(--out),transform .35s var(--out)}
+@media(hover:hover) and (pointer:fine){.q:hover{border-color:var(--gold);transform:translateY(-3px)}}
+.q .n{font-family:'Source Serif 4',serif;font-style:italic;font-size:clamp(34px,5vw,52px);color:var(--gold);line-height:1}
+.q h3{font-family:'Source Serif 4',serif;font-size:clamp(20px,3vw,27px);font-weight:600;line-height:1.25;max-width:26ch}
+.q p{margin-top:10px;font-size:14.5px;color:var(--ember);max-width:52ch}
+
+/* CLOSE */
+.close{text-align:center;padding-bottom:clamp(110px,16vh,190px)}
+.close h2{margin:14px auto 0;max-width:16ch}
+.close p{color:var(--ember);max-width:46ch;margin:20px auto 0;font-size:16px}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
+.btn{display:inline-block;padding:18px 42px;background:var(--gold);color:var(--maroon);text-decoration:none;position:relative;overflow:hidden;
+ font-stretch:125%;font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+ transition:transform .16s var(--out),box-shadow .3s var(--out)}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn .sheen{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,oklch(100% 0 0 / .45) 50%,transparent 60%);translate:-110% 0;transition:translate .7s var(--inout)}
+@media(hover:hover) and (pointer:fine){
+ .btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px oklch(0% 0 0 / .35)}
+ .btn:hover .sheen{translate:110% 0}}
+.btn:active{transform:scale(0.97)}
+
+footer{border-top:1px solid oklch(100% 0 0 / .16);padding:26px 0 40px;text-align:center;
+ font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:oklch(85% .04 85 / .6);font-stretch:125%;line-height:2.1}
+
+@media(max-width:680px){
+ .moment{grid-template-columns:1fr;gap:8px;padding-left:34px}
+ .moment .date{padding-top:0}
+ .q{grid-template-columns:1fr;gap:10px}
+ nav .for{display:none}
+ .eyebrow{letter-spacing:.15em}
+}
+@media(prefers-reduced-motion:reduce){
+ .js .rv,.js .line>span,.js .hero .sub,.js .hero .eyebrow{transition-duration:.01ms!important;transform:none!important;opacity:1!important}
+ .marq-track{animation:none}
+ .spine-fill{transform:none!important}
+ html{scroll-behavior:auto}
+}
+</style></head>
+<body>
+<div class="ground"></div><div class="grain"></div>
+<div id="progress"></div>
+
+<nav id="nav">
+ <div class="mark">HT <span>×</span> TAYLORMADE</div>
+ <div class="for">Fall 2026 · Draft for Dr. Dillon</div>
+</nav>
+
+<header class="hero wrap" id="hero">
+ <div class="eyebrow">Huston-Tillotson University · The Season Ahead</div>
+ <h1><span class="line"><span>The fall,</span></span> <span class="line"><span><em>mapped.</em></span></span></h1>
+ <p class="sub"><b>Every date on this page came from your calendar, Dr. Dillon.</b> What gets made around each one is the draft. Mark up what is missing on your side, and it folds into one plan.</p>
+</header>
+
+<div class="marq" aria-hidden="true"><div class="marq-track" id="marq">
+ <span>First Day of Classes</span><span>Opening Convocation</span><span>FAFSA Opens</span><span>Midterms</span><span>Advising</span><span>Charter Day</span><span>Spring Registration</span><span>Thanksgiving</span><span>Giving Tuesday</span><span>Finals</span>
+</div></div>
+
+<section id="map">
+ <div class="wrap">
+  <div class="eyebrow rv">The Moments</div>
+  <h2 class="rv d-1">Ten dates carry the whole semester.</h2>
+  <p class="intro rv d-2">One piece per day, never more, so nothing competes with itself. Each moment below lists what it calls for. Nothing here is final.</p>
+
+  <div class="timeline" id="tl">
+   <div class="spine"><div class="spine-fill" id="spinefill"></div></div>
+
+   <div class="moment">
+    <div class="date">Aug 24<small>Monday</small></div>
+    <div>
+     <h3>First Day of Classes<span class="now">In motion</span></h3>
+     <p class="why">The campus at full energy. The season opens whether we are rolling or not.</p>
+     <ul>
+      <li>First-week student voices on camera, banked while the energy is real</li>
+      <li>The President's welcome, in her own words, cut for every platform</li>
+      <li>Campus footage banked now that feeds the entire fall</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Sep 10<small>Thursday</small></div>
+    <div>
+     <h3>President's Fall Opening Convocation</h3>
+     <p class="why">The strongest presidential moment of the semester. Dr. Wallace, on stage, in her element.</p>
+     <ul>
+      <li>A hero reel cut same day, while it still carries</li>
+      <li>Her charge to students clipped into shareable moments</li>
+      <li>Photography that feeds recruitment pieces for months</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Oct 1<small>Thursday</small></div>
+    <div>
+     <h3>FAFSA Opens for 2027–28</h3>
+     <p class="why">The enrollment clock starts, and the audience is parents.</p>
+     <ul>
+      <li>Plain-language explainers built for families, not administrators</li>
+      <li>Announcement spots in the campus voice, pushed where students look</li>
+      <li>One page that walks a family from question to submission</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Oct 5–8</div>
+    <div>
+     <h3>Midterm Examinations</h3>
+     <p class="why">Retention is won in weeks like this one.</p>
+     <ul>
+      <li>Short, real encouragement from the President</li>
+      <li>Study-week content students forward to each other</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Oct 19<small>Monday</small></div>
+    <div>
+     <h3>Academic Advising Begins</h3>
+     <p class="why">Service content: point every student to the right door.</p>
+     <ul>
+      <li>Quick how-to spots on getting advised</li>
+      <li>Reminders pushed where students actually are</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Oct 23<small>Friday</small></div>
+    <div>
+     <h3>Charter Day Observance</h3>
+     <p class="why">The founding, observed. The legacy moment of the fall, and the natural pivot from pride to support.</p>
+     <ul>
+      <li>A heritage film moment built from the university's own story</li>
+      <li>Alumni voices on what the charter made possible</li>
+      <li>The first giving touch of the season, dignified, never begging</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Oct 26<small>Monday</small></div>
+    <div>
+     <h3>Spring 2027 Registration Opens</h3>
+     <p class="why">Registration is retention. Keep the students you have.</p>
+     <ul>
+      <li>Register-now pushes written in student language</li>
+      <li>Countdown mechanics across stories through the window</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Nov 25–27</div>
+    <div>
+     <h3>Thanksgiving Break</h3>
+     <p class="why">Gratitude, on the record, setting the table for what December asks.</p>
+     <ul>
+      <li>The President's Thanksgiving message, real and unhurried</li>
+      <li>Gratitude content that quietly opens the giving season</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Dec 1<small>Tuesday</small></div>
+    <div>
+     <h3>Giving Tuesday</h3>
+     <p class="why">The one day the whole country gives. HT should be impossible to miss.</p>
+     <ul>
+      <li>Campaign creative built and approved weeks ahead</li>
+      <li>Her voice, real, carrying the ask</li>
+      <li>A day-after thank-you that reports what happened</li>
+     </ul>
+    </div>
+   </div>
+
+   <div class="moment">
+    <div class="date">Dec 8–11</div>
+    <div>
+     <h3>Final Examinations</h3>
+     <p class="why">Close the semester the way it opened: with belief.</p>
+     <ul>
+      <li>Finals-week encouragement from the top</li>
+      <li>The semester recap that becomes recruitment gold for spring</li>
+     </ul>
+    </div>
+   </div>
+
+  </div>
+ </div>
+</section>
+
+<div class="chapters">
+ <div class="chapter ch-1"><div class="wrap inner">
+  <div class="mo rv">September</div>
+  <h3 class="rv d-1">Fall in <em>love.</em></h3>
+  <p class="rv d-2">September asks for nothing. It lets Austin, parents, and alumni fall in love first. Every piece is pride, energy, and faces, anchored by Convocation.</p>
+ </div></div>
+ <div class="chapter ch-2"><div class="wrap inner">
+  <div class="mo rv">October</div>
+  <h3 class="rv d-1"><em>Belong.</em></h3>
+  <p class="rv d-2">October turns attention into belonging. Charter Day anchors the month while FAFSA, advising, and registration carry the practical work underneath.</p>
+ </div></div>
+ <div class="chapter ch-3"><div class="wrap inner">
+  <div class="mo rv">November + December</div>
+  <h3 class="rv d-1"><em>Invest.</em></h3>
+  <p class="rv d-2">By November the audience has watched the story all fall. Now, and only now, it is asked to invest in it: gratitude first, Giving Tuesday, then the year-end close.</p>
+  <p class="law rv d-3">September and October never ask for money. <span>That is what lets November and December ask twice.</span></p>
+ </div></div>
+</div>
+
+<section id="questions">
+ <div class="wrap">
+  <div class="eyebrow rv">Before this is final</div>
+  <h2 class="rv d-1">Two answers I need from you.</h2>
+  <div class="qs">
+   <div class="q rv d-1">
+    <div class="n">1</div>
+    <div>
+     <h3>When is Homecoming?</h3>
+     <p>It is not on the academic calendar, and the answer changes how October and the spring get built. If it lives in February, the fall map holds; if a fall date exists, it becomes an anchor.</p>
+    </div>
+   </div>
+   <div class="q rv d-2">
+    <div class="n">2</div>
+    <div>
+     <h3>Which number leads the season: 150 years since 1875, or the 152nd Charter?</h3>
+     <p>Both are true. The season should say one of them loudly and consistently, everywhere, so the story compounds instead of splitting.</p>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="close">
+ <div class="wrap">
+  <div class="eyebrow rv">Your move</div>
+  <h2 class="rv d-1">The rest of this map is yours to draw.</h2>
+  <p class="rv d-2">Send everything your office needs across the year: campaigns, announcements, the app, print, whatever is on the list. It all folds into one plan.</p>
+  <div class="cta rv d-3">
+   <a class="btn" href="sms:+18177071291"><span class="sheen"></span>Text me the list</a>
+   <a class="btn ghost" href="mailto:taylormademd@gmail.com?subject=Fall%20map%20markup">Email your markup</a>
+  </div>
+ </div>
+</section>
+
+<footer><div class="wrap">
+Where every soul finds its strength.<br>
+Built from the 2026–2027 academic calendar · Draft for discussion<br>
+Prepared for Dr. Shaquille K. Dillon · Taylormade Creative · August 2026
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* hero entrance + watchdog */
+addEventListener('load',()=>requestAnimationFrame(()=>document.getElementById('hero').classList.add('in')));
+setTimeout(()=>document.getElementById('hero').classList.add('in'),900);
+
+/* marquee: duplicate track for seamless loop */
+const mq=document.getElementById('marq');
+mq.innerHTML+=mq.innerHTML;
+
+/* nav shade + progress bar (transform only, rAF-throttled) */
+const nav=document.getElementById('nav'),prog=document.getElementById('progress');
+let ticking=false;
+const paint=()=>{ticking=false;
+ nav.classList.toggle('scrolled',scrollY>40);
+ const max=document.documentElement.scrollHeight-innerHeight;
+ prog.style.transform='scaleX('+(max>0?scrollY/max:0)+')';};
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(paint);}},{passive:true});paint();
+
+/* reveal: IO + sweep watchdog */
+const rvs=[...document.querySelectorAll('.rv')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+rvs.forEach(el=>io.observe(el));
+const sweep=()=>{const vh=innerHeight;rvs.forEach(el=>{if(!el.classList.contains('in')&&el.getBoundingClientRect().top<vh*.96)el.classList.add('in');});};
+addEventListener('scroll',sweep,{passive:true});addEventListener('load',sweep);
+
+/* timeline dots light as they pass */
+const moments=[...document.querySelectorAll('.moment')];
+const mio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('lit');mio.unobserve(e.target);}}),{threshold:.3,rootMargin:'0px 0px -20% 0px'});
+moments.forEach(m=>mio.observe(m));
+const msweep=()=>{const vh=innerHeight;moments.forEach(m=>{if(!m.classList.contains('lit')&&m.getBoundingClientRect().top<vh*.8)m.classList.add('lit');});};
+addEventListener('scroll',msweep,{passive:true});
+
+/* GSAP scrubs: set+to only */
+if(window.gsap&&window.ScrollTrigger&&!rm){
+ gsap.registerPlugin(ScrollTrigger);
+ gsap.set('#spinefill',{scaleY:0});
+ gsap.to('#spinefill',{scaleY:1,ease:'none',
+  scrollTrigger:{trigger:'#tl',start:'top 75%',end:'bottom 55%',scrub:.5}});
+ gsap.to('#hero h1',{yPercent:-8,ease:'none',
+  scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+ setTimeout(()=>ScrollTrigger.refresh(),1200);
+}else{
+ document.getElementById('spinefill').style.transform='none';
+}
+</script>
+</body></html>
