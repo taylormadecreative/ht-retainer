@@ -1,121 +1,334 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Johnson Family Endowed Scholarship</title>
-<meta name="description" content="A personalized donor stewardship page — Huston-Tillotson University Institutional Advancement. Demonstration mockup by Taylormade Creative.">
+<meta name="description" content="A personalized donor stewardship experience. Huston-Tillotson University Institutional Advancement. Demonstration mockup by Taylormade Creative.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Archivo:wdth,wght@100,400..800;125,400..800&display=swap" rel="stylesheet">
 <style>
-:root{--maroon:#660100;--mahogany:#3B0000;--gold:#FFCC00;--sand:#FFFAEB;--ember:#F7E3B8;--terra:#291C14;--brick:#8F0000;--honey:#D68A2B}
+:root{
+--maroon:oklch(24% .09 25);--mahogany:oklch(18% .07 25);--deep:oklch(14% .05 25);
+--gold:#FFCC00;--honey:#D68A2B;--sand:#FFFAEB;--ember:#F7E3B8;--terra:#291C14;--brick:#8F0000;
+--out:cubic-bezier(0.23,1,0.32,1);--inout:cubic-bezier(0.77,0,0.175,1);
+}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--maroon);color:var(--sand);font-family:'Archivo',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:680px;margin:0 auto;padding:0 26px}
-.eyebrow{font-stretch:125%;font-weight:700;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+body{background:var(--maroon);color:var(--sand);font-family:'Archivo',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .serif{font-family:'Source Serif 4',serif}
+.wrap{max-width:1060px;margin:0 auto;padding:0 clamp(22px,5vw,56px)}
+.eyebrow{font-stretch:125%;font-weight:700;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 
-.hero{padding:72px 0 56px;text-align:center;border-bottom:1px solid rgba(255,250,235,.18)}
-.hero .mono{font-family:'Source Serif 4',serif;font-size:15px;letter-spacing:.08em;color:var(--ember);margin-bottom:26px}
-.hero h1{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(38px,8vw,60px);line-height:1.05;letter-spacing:-.01em;margin:16px 0 10px}
+/* ambient ground: layered radial washes, no flat color */
+.ground{position:fixed;inset:0;z-index:-2;background:
+ radial-gradient(120% 90% at 50% -10%, oklch(30% .11 25) 0%, transparent 55%),
+ radial-gradient(90% 70% at 85% 105%, oklch(20% .08 40) 0%, transparent 50%),
+ var(--maroon)}
+.grain{position:fixed;inset:-50%;z-index:-1;pointer-events:none;opacity:.05;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+
+/* NAV: minimal split */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+ padding:18px clamp(22px,5vw,56px);transition:transform .4s var(--out),background .4s var(--out)}
+nav.scrolled{background:oklch(18% .07 25 / .88);backdrop-filter:blur(10px)}
+nav .mark{font-family:'Source Serif 4',serif;font-weight:700;font-size:17px;letter-spacing:.04em}
+nav .mark span{color:var(--gold)}
+nav .for{font-stretch:125%;font-weight:700;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ember)}
+
+/* HERO: cinematic center */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+ padding:120px 22px 90px;position:relative}
+.hero .inst{font-family:'Source Serif 4',serif;font-size:14px;letter-spacing:.1em;color:var(--ember);text-transform:uppercase}
+.hero .rule{width:0;height:1px;background:var(--gold);margin:22px auto;transition:width 1.1s var(--out) .3s}
+.js .hero.in .rule{width:120px}
+.hero h1{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(42px,8.5vw,96px);line-height:1.02;letter-spacing:-.015em;max-width:16ch}
 .hero h1 em{font-style:italic;color:var(--gold)}
-.hero .fund{font-family:'Source Serif 4',serif;font-style:italic;font-size:19px;color:var(--ember)}
-.hero p.open{font-size:16.5px;color:var(--ember);max-width:480px;margin:26px auto 0}
+.hero .fund{margin-top:18px;font-family:'Source Serif 4',serif;font-style:italic;font-size:clamp(16px,2.4vw,21px);color:var(--ember)}
+.hero p.open{margin-top:30px;max-width:46ch;font-size:16.5px;color:var(--ember)}
+.hero .scroll-cue{position:absolute;bottom:34px;left:50%;translate:-50% 0;font-stretch:125%;font-weight:700;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);opacity:.7}
+.hero .scroll-cue::after{content:"";display:block;width:1px;height:34px;background:linear-gradient(var(--gold),transparent);margin:10px auto 0}
+/* staggered line entrance */
+.js .line{display:inline-block;overflow:hidden;vertical-align:bottom}
+.js .line>span{display:inline-block;transform:translateY(110%);transition:transform .9s var(--out)}
+.js .hero.in .line>span{transform:translateY(0)}
+.js .hero.in .line:nth-child(2)>span{transition-delay:.08s}
+.js .d1{transition:opacity .8s var(--out) .5s,transform .8s var(--out) .5s}
+.js .d2{transition:opacity .8s var(--out) .65s,transform .8s var(--out) .65s}
+.js .d3{transition:opacity .8s var(--out) .8s,transform .8s var(--out) .8s}
+.js .hero .d1,.js .hero .d2,.js .hero .d3{opacity:0;transform:translateY(14px)}
+.js .hero.in .d1,.js .hero.in .d2,.js .hero.in .d3{opacity:1;transform:translateY(0)}
 
-section{padding:56px 0;border-bottom:1px solid rgba(255,250,235,.18)}
-h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(27px,5vw,36px);line-height:1.1;margin:10px 0 0}
+section{padding:clamp(90px,14vh,160px) 0;position:relative}
+h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.08;margin-top:12px;letter-spacing:-.01em;max-width:20ch}
 
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
-.stat{border:1px solid rgba(255,250,235,.2);padding:22px 20px}
-.stat.big{grid-column:1/-1;background:var(--sand);color:var(--terra);border:none}
-.stat b{display:block;font-stretch:125%;font-weight:700;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.stat.big b{color:var(--brick)}
-.stat .n{font-family:'Source Serif 4',serif;font-size:34px;font-weight:600;line-height:1}
-.stat.big .n{font-size:46px;color:var(--maroon)}
-.stat small{display:block;font-size:12.5px;color:var(--ember);margin-top:7px}
-.stat.big small{color:#61422E}
+/* reveal system: visible by default; .js opts in, sweep watchdog guarantees landing */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--out),transform .8s var(--out)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.d-1{transition-delay:.07s}.js .rv.d-2{transition-delay:.14s}.js .rv.d-3{transition-delay:.21s}
 
-.student{margin-top:30px;background:var(--mahogany);padding:30px 28px}
-.student .q{font-family:'Source Serif 4',serif;font-style:italic;font-size:21px;line-height:1.4;color:var(--sand)}
-.student .who{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,250,235,.18);font-size:13.5px;color:var(--ember)}
-.student .who b{display:block;font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
-.scholars{margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.sch{border:1px solid rgba(255,250,235,.18);padding:16px 14px;text-align:center}
-.sch .serif{font-size:16px;font-weight:600}
-.sch small{display:block;font-size:11.5px;color:var(--ember);margin-top:4px}
+/* THE FUND: editorial numbers, not tiles */
+.fund-line{margin-top:42px;font-family:'Source Serif 4',serif;font-size:clamp(24px,4vw,38px);line-height:1.32;max-width:24ch}
+.fund-line .num{color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums}
+.substats{margin-top:46px;display:flex;gap:clamp(28px,6vw,70px);flex-wrap:wrap}
+.sub{min-width:150px}
+.sub b{display:block;font-stretch:125%;font-weight:700;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.sub .n{font-family:'Source Serif 4',serif;font-size:clamp(28px,3.6vw,38px);font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.sub small{display:block;font-size:12.5px;color:var(--ember);margin-top:7px}
+/* growth line draw */
+.growth{margin-top:56px}
+.growth svg{width:100%;height:auto;display:block}
+.growth .axis{stroke:oklch(100% 0 0 / .14);stroke-width:1}
+.growth .curve{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-linecap:round}
+.growth .fill{fill:url(#gfill);opacity:0}
+.js .growth .fill{transition:opacity 1s var(--out) .9s}
+.js .growth.in .fill{opacity:1}
+.growth .yr{font:600 11px 'Archivo';fill:var(--ember);letter-spacing:.08em}
+.growth .cap{font:italic 600 13px 'Source Serif 4';fill:var(--ember)}
 
-.letter{margin-top:30px}
-.letter p{font-family:'Source Serif 4',serif;font-size:17.5px;line-height:1.65;color:var(--sand);margin-top:18px}
-.letter .sig{font-family:'Source Serif 4',serif;font-style:italic;font-size:19px;color:var(--gold);margin-top:24px}
-.letter .role{font-size:12.5px;color:var(--ember);letter-spacing:.06em;margin-top:4px}
+/* THE NAMES: horizontal-accordion dossiers */
+.dossiers{margin-top:46px;border-top:1px solid oklch(100% 0 0 / .16)}
+.dossier{border-bottom:1px solid oklch(100% 0 0 / .16)}
+.dossier button{all:unset;display:flex;width:100%;justify-content:space-between;align-items:baseline;gap:14px;
+ padding:26px 4px;cursor:pointer;transition:padding-left .35s var(--out)}
+@media(hover:hover) and (pointer:fine){.dossier button:hover{padding-left:16px}.dossier button:hover .nm{color:var(--gold)}}
+.dossier .nm{font-family:'Source Serif 4',serif;font-size:clamp(21px,3.2vw,28px);font-weight:600;transition:color .25s var(--out)}
+.dossier .meta{font-size:12.5px;color:var(--ember);white-space:nowrap;display:flex;align-items:center;gap:14px}
+.dossier .plus{width:15px;height:15px;position:relative;flex:none}
+.dossier .plus::before,.dossier .plus::after{content:"";position:absolute;background:var(--gold);inset:50% auto auto 0;width:100%;height:1.5px;translate:0 -50%;transition:rotate .35s var(--out)}
+.dossier .plus::after{rotate:90deg}
+.dossier[data-open] .plus::after{rotate:0deg}
+.dossier .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--out)}
+.dossier[data-open] .body{grid-template-rows:1fr}
+.dossier .body>div{overflow:hidden}
+.dossier .q{font-family:'Source Serif 4',serif;font-style:italic;font-size:clamp(17px,2.6vw,22px);line-height:1.5;color:var(--sand);max-width:56ch;
+ opacity:0;transform:translateY(10px);transition:opacity .45s var(--out) .1s,transform .45s var(--out) .1s;padding:0 4px}
+.dossier[data-open] .q{opacity:1;transform:none}
+.dossier .tag{padding:14px 4px 30px;font-size:12.5px;color:var(--ember);opacity:0;transition:opacity .45s var(--out) .18s}
+.dossier[data-open] .tag{opacity:1}
+.hint{margin-top:14px;font-size:12px;color:var(--ember);opacity:.65}
 
-.close{text-align:center;border-bottom:none;padding:64px 0 70px}
-.close h2{max-width:440px;margin:0 auto}
-.close p{color:var(--ember);max-width:420px;margin:16px auto 0;font-size:15.5px}
-.btn{display:inline-block;margin-top:28px;padding:16px 34px;background:var(--gold);color:var(--maroon);text-decoration:none;font-stretch:125%;font-weight:800;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase}
-.alt{display:block;margin-top:16px;color:var(--ember);font-size:13px}
-.alt a{color:var(--gold);text-decoration:none}
+/* LETTER: word scrub */
+.letter-wrap{background:var(--mahogany);border-top:1px solid oklch(100% 0 0 / .1);border-bottom:1px solid oklch(100% 0 0 / .1)}
+.letter p{font-family:'Source Serif 4',serif;font-size:clamp(20px,3.1vw,30px);line-height:1.55;max-width:30ch;margin-top:40px}
+.letter p .w{opacity:.14;transition:opacity .3s linear}
+.letter .sig{font-family:'Source Serif 4',serif;font-style:italic;font-size:24px;color:var(--gold);margin-top:36px}
+.letter .role{font-size:12.5px;color:var(--ember);margin-top:5px;letter-spacing:.05em}
 
-@media(max-width:520px){.eyebrow{letter-spacing:.16em;font-size:10.5px}.hero .mono{font-size:13px}.scholars{grid-template-columns:1fr}.sch{display:flex;justify-content:space-between;align-items:baseline;text-align:left}.sch small{margin-top:0}.stats{grid-template-columns:1fr}}
-body{overflow-x:hidden}
-footer{border-top:1px solid rgba(255,250,235,.18);padding:22px 0 34px;text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,227,184,.6);font-stretch:125%;line-height:2}
-</style></head><body>
+/* CLOSE: bell tower parallax + CTA */
+.close{text-align:center;overflow:hidden;padding-bottom:clamp(110px,16vh,190px)}
+.tower{position:absolute;left:50%;bottom:-40px;translate:-50% 0;width:min(300px,55vw);opacity:.14;pointer-events:none;will-change:transform}
+.close h2{margin:14px auto 0;max-width:15ch}
+.close p{color:var(--ember);max-width:44ch;margin:20px auto 0;font-size:16px}
+.btn{display:inline-block;margin-top:38px;padding:19px 46px;background:var(--gold);color:var(--maroon);text-decoration:none;
+ font-stretch:125%;font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;position:relative;overflow:hidden;
+ transition:transform .16s var(--out),box-shadow .3s var(--out)}
+.btn .sheen{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,oklch(100% 0 0 / .45) 50%,transparent 60%);
+ translate:-110% 0;transition:translate .7s var(--inout)}
+@media(hover:hover) and (pointer:fine){
+ .btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px oklch(0% 0 0 / .35)}
+ .btn:hover .sheen{translate:110% 0}}
+.btn:active{transform:scale(0.97)}
+.alt{display:block;margin-top:18px;color:var(--ember);font-size:13px}
+.alt a{color:var(--gold);text-decoration:none;background:linear-gradient(var(--gold),var(--gold)) no-repeat 0 100%/0 1px;transition:background-size .3s var(--out);padding-bottom:2px}
+@media(hover:hover){.alt a:hover{background-size:100% 1px}}
 
-<div class="wrap">
+footer{border-top:1px solid oklch(100% 0 0 / .16);padding:26px 0 40px;text-align:center;
+ font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:oklch(85% .04 85 / .6);font-stretch:125%;line-height:2.1}
 
-<header class="hero">
-<div class="mono">HUSTON-TILLOTSON UNIVERSITY · INSTITUTIONAL ADVANCEMENT</div>
-<div class="eyebrow">Your Year on the Hill · 2025–2026</div>
-<h1>Thank you, <em>Robert &amp; Denise.</em></h1>
-<div class="fund">The Johnson Family Endowed Scholarship · Established 2019</div>
-<p class="open">This page was made for two people. It is what your generosity did this year — by the numbers, and by the names.</p>
+@media(max-width:560px){
+ .eyebrow{letter-spacing:.15em}
+ .substats{gap:26px}
+ nav .for{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .js .rv,.js .line>span,.js .hero .d1,.js .hero .d2,.js .hero .d3{transition-duration:.01ms!important;transform:none!important;opacity:1!important}
+ .hero .rule{transition:none;width:120px}
+ .letter p .w{opacity:1!important}
+ .tower{transform:none!important}
+ html{scroll-behavior:auto}
+}
+</style></head>
+<body>
+<div class="ground"></div><div class="grain"></div>
+
+<nav id="nav">
+ <div class="mark">HUSTON-TILLOTSON <span>·</span> ADVANCEMENT</div>
+ <div class="for">Prepared for Robert &amp; Denise Johnson</div>
+</nav>
+
+<header class="hero" id="hero">
+ <div class="inst d1">Your Year on the Hill · 2025–2026</div>
+ <div class="rule"></div>
+ <h1><span class="line"><span>Thank you,</span></span> <span class="line"><span><em>Robert &amp; Denise.</em></span></span></h1>
+ <div class="fund d2">The Johnson Family Endowed Scholarship · Established 2019</div>
+ <p class="open d3">This page was made for two people. It is what your generosity did this year: by the numbers, and by the names.</p>
+ <div class="scroll-cue">Scroll</div>
 </header>
 
-<section>
-<div class="eyebrow">The Fund</div>
-<h2>Your gift kept growing.</h2>
-<div class="stats">
-<div class="stat big"><b>Scholarships awarded this year</b><span class="n">$21,400</span><small>Distributed across the 2025–26 academic year — while the fund itself remains untouched, working in perpetuity.</small></div>
-<div class="stat"><b>Fund value</b><span class="n">$487,000</span><small>As of June 30, 2026</small></div>
-<div class="stat"><b>Growth this year</b><span class="n">+6.2%</span><small>Net of awards distributed</small></div>
-</div>
+<section id="fund">
+ <div class="wrap">
+  <div class="eyebrow rv">The Fund</div>
+  <h2 class="rv d-1">Your gift kept growing.</h2>
+  <p class="fund-line serif rv d-2">This year your fund awarded <span class="num" data-count="21400" data-prefix="$">$0</span> in scholarships, while the endowment itself remained untouched, working in perpetuity.</p>
+  <div class="substats">
+   <div class="sub rv d-1"><b>Fund value</b><span class="n num" data-count="487000" data-prefix="$">$0</span><small>As of June 30, 2026</small></div>
+   <div class="sub rv d-2"><b>Growth this year</b><span class="n num" data-count="6.2" data-prefix="+" data-suffix="%" data-dec="1">+0%</span><small>Net of awards distributed</small></div>
+   <div class="sub rv d-3"><b>Students carried since 2019</b><span class="n num" data-count="11">0</span><small>Across seven academic years</small></div>
+  </div>
+  <div class="growth rv d-2" id="growth">
+   <svg viewBox="0 0 900 260" role="img" aria-label="Fund value growth from 2019 to 2026, sample data">
+    <defs><linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
+     <stop offset="0" stop-color="#FFCC00" stop-opacity=".22"/><stop offset="1" stop-color="#FFCC00" stop-opacity="0"/>
+    </linearGradient></defs>
+    <line class="axis" x1="40" y1="220" x2="880" y2="220"/>
+    <path class="fill" d="M60,190 C180,182 260,168 380,150 C500,132 580,120 700,96 C760,84 810,74 840,62 L840,220 L60,220 Z"/>
+    <path class="curve" id="curve" d="M60,190 C180,182 260,168 380,150 C500,132 580,120 700,96 C760,84 810,74 840,62"/>
+    <g class="yr"><text x="52" y="242">2019</text><text x="440" y="242" text-anchor="middle">2022</text><text x="838" y="242" text-anchor="end">2026</text></g>
+    <text class="cap" x="838" y="46" text-anchor="end">the fund, seven years on</text>
+   </svg>
+  </div>
+ </div>
 </section>
 
-<section>
-<div class="eyebrow">The Names</div>
-<h2>Three Rams carried your name this year.</h2>
-<div class="student">
-<p class="q">"I found out about the scholarship the same week my hours got cut at work. I stayed enrolled because of the Johnson family. I want them to know I made the Dean's List."</p>
-<div class="who"><b>Jasmine C. · Junior</b>Biology, pre-nursing · Dallas, TX · First-generation college student</div>
-</div>
-<div class="scholars">
-<div class="sch"><span class="serif">Jasmine C.</span><small>Biology · '27</small></div>
-<div class="sch"><span class="serif">Marcus T.</span><small>Business · '26</small></div>
-<div class="sch"><span class="serif">Aaliyah R.</span><small>Kinesiology · '28</small></div>
-</div>
+<section id="names">
+ <div class="wrap">
+  <div class="eyebrow rv">The Names</div>
+  <h2 class="rv d-1">Three Rams carried your name this year.</h2>
+  <div class="dossiers rv d-2">
+   <div class="dossier" data-open>
+    <button aria-expanded="true">
+     <span class="nm">Jasmine C.</span>
+     <span class="meta">Biology, pre-nursing · '27 <span class="plus" aria-hidden="true"></span></span>
+    </button>
+    <div class="body"><div>
+     <p class="q">"I found out about the scholarship the same week my hours got cut at work. I stayed enrolled because of the Johnson family. I want them to know I made the Dean's List."</p>
+     <div class="tag">Junior · Dallas, TX · First-generation college student</div>
+    </div></div>
+   </div>
+   <div class="dossier">
+    <button aria-expanded="false">
+     <span class="nm">Marcus T.</span>
+     <span class="meta">Business Administration · '26 <span class="plus" aria-hidden="true"></span></span>
+    </button>
+    <div class="body"><div>
+     <p class="q">"Senior year is when the money runs thinnest and the stakes run highest. This award let me finish my internship instead of picking up a second job."</p>
+     <div class="tag">Senior · Houston, TX · W.E.B. DuBois Honors Program</div>
+    </div></div>
+   </div>
+   <div class="dossier">
+    <button aria-expanded="false">
+     <span class="nm">Aaliyah R.</span>
+     <span class="meta">Kinesiology · '28 <span class="plus" aria-hidden="true"></span></span>
+    </button>
+    <div class="body"><div>
+     <p class="q">"I'm the first athlete in my family to stay in school past sophomore year. Somebody I've never met decided I was worth investing in. I think about that a lot."</p>
+     <div class="tag">Sophomore · Austin, TX · Women's Volleyball</div>
+    </div></div>
+   </div>
+  </div>
+  <div class="hint rv d-3">Tap a name to read their words.</div>
+ </div>
 </section>
 
-<section>
-<div class="eyebrow">From the Hill</div>
-<h2>A word from the President.</h2>
-<div class="letter">
-<p>Robert and Denise — endowments are how a university makes a promise it can keep forever. Yours has now carried eleven students across seven years, and this year it carried three more. On behalf of every one of them: thank you for believing in what happens on this Hill.</p>
-<div class="sig">Dr. Melva K. Wallace</div>
-<div class="role">7th President &amp; CEO, Huston-Tillotson University</div>
-</div>
+<section class="letter-wrap">
+ <div class="wrap letter">
+  <div class="eyebrow rv">From the Hill</div>
+  <h2 class="rv d-1">A word from the President.</h2>
+  <p id="scrub">Robert and Denise, endowments are how a university makes a promise it can keep forever. Yours has now carried eleven students across seven years, and this year it carried three more. On behalf of every one of them: thank you for believing in what happens on this Hill.</p>
+  <div class="sig rv">Dr. Melva K. Wallace</div>
+  <div class="role rv d-1">7th President &amp; CEO, Huston-Tillotson University</div>
+ </div>
 </section>
 
 <section class="close">
-<div class="eyebrow">For Such a Time as This</div>
-<h2>Next year, there could be a fourth name.</h2>
-<p>Every addition to the fund raises what it awards — this year, and every year after. If you'd like to talk about what that could look like, we would love nothing more.</p>
-<a class="btn" href="mailto:lyjackson@htu.edu?subject=The%20Johnson%20Family%20Endowed%20Scholarship">Continue the Legacy</a>
-<span class="alt">Or reach Linda Y. Jackson, VP for Institutional Advancement, directly at <a href="tel:5125053111">512.505.3111</a></span>
+ <svg class="tower" id="tower" viewBox="0 0 120 420" aria-hidden="true">
+  <path fill="#FFCC00" d="M52 0h16l6 60h8v18h-4l4 240h6v22h-10l4 80H38l4-80H32v-22h6l4-240h-4V60h8z"/>
+  <rect x="46" y="70" width="28" height="34" rx="3" fill="#661000" opacity=".55"/>
+ </svg>
+ <div class="wrap">
+  <div class="eyebrow rv">For Such a Time as This</div>
+  <h2 class="rv d-1">Next year, there could be a fourth name.</h2>
+  <p class="rv d-2">Every addition to the fund raises what it awards: this year, and every year after. If you'd like to talk about what that could look like, we would love nothing more.</p>
+  <a class="btn rv d-3" href="mailto:lyjackson@htu.edu?subject=The%20Johnson%20Family%20Endowed%20Scholarship"><span class="sheen"></span>Continue the Legacy</a>
+  <span class="alt rv d-3">Or reach Linda Y. Jackson, VP for Institutional Advancement, at <a href="tel:5125053111">512.505.3111</a></span>
+ </div>
 </section>
 
-<footer>
+<footer><div class="wrap">
 Where every soul finds its strength.<br>
 900 Chicon Street, Austin, Texas 78702 · HTU.EDU<br>
 Demonstration mockup · All donor names, students, and figures are sample data
-</footer>
+</div></footer>
 
-</div></body></html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* hero entrance */
+addEventListener('load',()=>requestAnimationFrame(()=>document.getElementById('hero').classList.add('in')));
+setTimeout(()=>document.getElementById('hero').classList.add('in'),900); /* watchdog */
+
+/* nav shade */
+const nav=document.getElementById('nav');
+const onScrollNav=()=>nav.classList.toggle('scrolled',scrollY>40);
+addEventListener('scroll',onScrollNav,{passive:true});onScrollNav();
+
+/* reveal: IO + per-scroll sweep watchdog (one-shot timers miss fast flicks) */
+const rvs=[...document.querySelectorAll('.rv')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+rvs.forEach(el=>io.observe(el));
+const sweep=()=>{const vh=innerHeight;rvs.forEach(el=>{if(!el.classList.contains('in')&&el.getBoundingClientRect().top<vh*.96)el.classList.add('in');});};
+addEventListener('scroll',sweep,{passive:true});addEventListener('load',sweep);
+
+/* count-ups */
+const fmt=(v,d)=>d?v.toFixed(d):Math.round(v).toLocaleString('en-US');
+const counters=[...document.querySelectorAll('.num[data-count]')];
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+ if(!e.isIntersecting)return;cio.unobserve(e.target);
+ const el=e.target,end=parseFloat(el.dataset.count),d=+(el.dataset.dec||0),
+ pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+ if(rm){el.textContent=pre+fmt(end,d)+suf;return;}
+ const t0=performance.now(),dur=1400,ease=t=>1-Math.pow(1-t,4);
+ const tick=n=>{const p=Math.min(1,(n-t0)/dur);el.textContent=pre+fmt(end*ease(p),d)+suf;if(p<1)requestAnimationFrame(tick);};
+ requestAnimationFrame(tick);
+}),{threshold:.5});
+counters.forEach(el=>cio.observe(el));
+
+/* dossier accordion: one open at a time */
+document.querySelectorAll('.dossier button').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  const d=btn.closest('.dossier'),open=d.hasAttribute('data-open');
+  document.querySelectorAll('.dossier[data-open]').forEach(o=>{o.removeAttribute('data-open');o.querySelector('button').setAttribute('aria-expanded','false');});
+  if(!open){d.setAttribute('data-open','');btn.setAttribute('aria-expanded','true');}
+ });
+});
+
+/* GSAP scroll work: set+to only, never .from */
+if(window.gsap&&window.ScrollTrigger&&!rm){
+ gsap.registerPlugin(ScrollTrigger);
+ /* growth line draw, scrubbed */
+ const curve=document.getElementById('curve');
+ const len=curve.getTotalLength();
+ gsap.set(curve,{strokeDasharray:len,strokeDashoffset:len});
+ gsap.to(curve,{strokeDashoffset:0,ease:'none',
+  scrollTrigger:{trigger:'#growth',start:'top 85%',end:'top 35%',scrub:.6,
+   onEnter:()=>document.getElementById('growth').classList.add('in')}});
+ /* letter word scrub */
+ const p=document.getElementById('scrub');
+ p.innerHTML=p.textContent.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ');
+ gsap.to('#scrub .w',{opacity:1,stagger:.5,ease:'none',
+  scrollTrigger:{trigger:'#scrub',start:'top 80%',end:'bottom 45%',scrub:.5}});
+ /* bell tower parallax */
+ gsap.to('#tower',{yPercent:-16,ease:'none',
+  scrollTrigger:{trigger:'.close',start:'top bottom',end:'bottom top',scrub:true}});
+ /* watchdog: if GSAP scrub never fired (jump-to-bottom), land everything */
+ setTimeout(()=>{ScrollTrigger.refresh();},1200);
+}else{
+ /* no GSAP or reduced motion: everything fully visible */
+ document.getElementById('growth').classList.add('in');
+ const c=document.getElementById('curve');if(c){c.style.strokeDasharray='none';}
+ document.querySelectorAll('#scrub .w').forEach(w=>w.style.opacity=1);
+}
+</script>
+</body></html>
